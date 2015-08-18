@@ -19,6 +19,7 @@ import trackandhack.trackandhackprototype_2.R;
 
 public class GiftCardActivity extends ActionBarActivity {
     GiftCard giftCard;
+    Button closeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +77,7 @@ public class GiftCardActivity extends ActionBarActivity {
     private void setupButtons() {
         Button doneButton = (Button) findViewById(R.id.doneButton);
         final Button adjustmentButton = (Button) findViewById(R.id.adjustmentButton);
-        Button closeButton = (Button) findViewById(R.id.closeButton);
+        closeButton = (Button) findViewById(R.id.closeButton);
         final Switch adjustmentSwitch = (Switch) findViewById(R.id.adjustmentSwitch);
         final EditText adjustmentInput = (EditText) findViewById(R.id.adjustmentInput);
         final TextView currentAmount = (TextView) findViewById(R.id.currentAmountText);
@@ -85,10 +86,7 @@ public class GiftCardActivity extends ActionBarActivity {
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GiftCardActivity.this, MainActivity.class);
-                intent.putExtra("giftCard", giftCard);
-                setResult(RESULT_OK, intent);
-                finish();
+                returnActivity();
             }
         });
 
@@ -104,9 +102,9 @@ public class GiftCardActivity extends ActionBarActivity {
                     }
                     Double amountAfterAdjustment = giftCard.adjustCurrentAmount(adjustmentDirection * adjustment);
                     if (amountAfterAdjustment == 0) {
-                        giftCard.setStatus(GiftCardStatus.CLOSED);
+                        setGiftCardStatus(GiftCardStatus.CLOSED);
                     } else if (giftCard.getStatus().equals(GiftCardStatus.CLOSED)) {
-                        giftCard.setStatus(GiftCardStatus.OPEN);
+                        setGiftCardStatus(GiftCardStatus.OPEN);
                     }
                     currentAmount.setText(giftCard.getCurrentAmount().toString());
                     progressBar.setProgress(giftCard.getCurrentAmount().intValue());
@@ -115,17 +113,36 @@ public class GiftCardActivity extends ActionBarActivity {
             }
         });
 
+        if (giftCard.getStatus().equals(GiftCardStatus.CLOSED)) {
+            closeButton.setEnabled(false);
+        }
+
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int adjustmentDirection = -1;
                 giftCard.adjustCurrentAmount(adjustmentDirection * giftCard.getInitialAmount());
-                giftCard.setStatus(GiftCardStatus.CLOSED);
+                setGiftCardStatus(GiftCardStatus.CLOSED);
+                returnActivity();
             }
         });
+
     }
 
     private void returnActivity() {
+        Intent intent = new Intent(GiftCardActivity.this, MainActivity.class);
+        intent.putExtra("giftCard", giftCard);
+        setResult(RESULT_OK, intent);
+        finish();
+    }
 
+    private void setGiftCardStatus(GiftCardStatus status) {
+        if (status.equals(GiftCardStatus.OPEN)) {
+            closeButton.setEnabled(true);
+            giftCard.setStatus(status);
+        } else if (status.equals(GiftCardStatus.CLOSED)) {
+            closeButton.setEnabled(false);
+            giftCard.setStatus(status);
+        }
     }
 }
