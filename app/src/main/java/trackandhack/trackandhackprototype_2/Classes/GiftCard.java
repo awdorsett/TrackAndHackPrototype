@@ -9,6 +9,24 @@ public class GiftCard extends Goal {
     Integer digits;
     Double fee;
 
+    static public GiftCard clone(GiftCard original) {
+        return new GiftCard(
+                original.getCurrentAmount(),
+                null,
+                original.getEndDate(),
+                original.getFee(),
+                original.getInitialAmount(),
+                original.getStartDate(),
+                GiftCardStatus.OPEN,
+                null
+        );
+
+    }
+
+    public GiftCard() {
+        this(0.0, 0, null, 0.0, 0.0, null, GiftCardStatus.OPEN, "");
+    }
+
     public GiftCard(Double currentAmount, Integer digits, Date endDate, Double fee, Double initialAmount, Date startDate, GiftCardStatus status, String title) {
         super(currentAmount, endDate, initialAmount, startDate, status, title);
         this.digits = digits;

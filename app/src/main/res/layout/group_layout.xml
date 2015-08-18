@@ -20,6 +20,6 @@
         android:layout_height="wrap_content"
         android:text="+"
         android:focusable="false"
-        android:id="@+id/button" />
+        android:id="@+id/createNewEntryButton" />
 
 </LinearLayout>

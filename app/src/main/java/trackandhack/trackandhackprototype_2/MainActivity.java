@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import trackandhack.trackandhackprototype_2.Activity.GiftCardActivity;
+import trackandhack.trackandhackprototype_2.Activity.NewGiftCardActivity;
 import trackandhack.trackandhackprototype_2.Classes.GiftCard;
 import trackandhack.trackandhackprototype_2.Classes.GiftCardStatus;
 import trackandhack.trackandhackprototype_2.Classes.Goal;
@@ -34,7 +36,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Group group;
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
 
 
         groupExpandableListView = (ExpandableListView) findViewById(R.id.groupList);

@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import trackandhack.trackandhackprototype_2.Classes.GiftCard;
 import trackandhack.trackandhackprototype_2.MainActivity;
@@ -19,6 +20,16 @@ public class NewGiftCardActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gift_card);
+
+        Intent intent = getIntent();
+
+        if(intent.hasExtra("clone")) {
+            giftCard = GiftCard.clone((GiftCard) intent.getSerializableExtra("clone"));
+        } else {
+            giftCard = new GiftCard();
+        }
+
+        setupButtons();
     }
 
 
@@ -42,5 +53,47 @@ public class NewGiftCardActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setupButtons() {
+        Button doneButton = (Button) findViewById(R.id.doneButton);
+        Button cancelButton = (Button) findViewById(R.id.cancelButton);
+
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean cardUpdated = updateCardInfo();
+                // TODO throw error messages on screen about required fields
+                if (cardUpdated) {
+                    Intent intent = new Intent(v.getContext(), MainActivity.class);
+                    intent.putExtra("giftCard", giftCard);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    // TODO validate inputs
+    private boolean updateCardInfo() {
+        EditText digits = (EditText) findViewById(R.id.digitsInput);
+        EditText fee = (EditText) findViewById(R.id.feeInput);
+        EditText amount = (EditText) findViewById(R.id.amountInput);
+        EditText title = (EditText) findViewById(R.id.titleInput);
+
+        giftCard.setDigits(Integer.parseInt(digits.getText().toString()));
+        giftCard.setFee(Double.parseDouble(fee.getText().toString()));
+        giftCard.setInitialAmount(Double.parseDouble(amount.getText().toString()));
+        giftCard.setCurrentAmount(Double.parseDouble(amount.getText().toString()));
+        giftCard.setTitle(title.getText().toString());
+
+        return true;
     }
 }

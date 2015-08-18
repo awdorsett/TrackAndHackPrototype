@@ -1,7 +1,11 @@
 package trackandhack.trackandhackprototype_2.Classes;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +16,8 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.List;
 
+import trackandhack.trackandhackprototype_2.Activity.NewGiftCardActivity;
+import trackandhack.trackandhackprototype_2.MainActivity;
 import trackandhack.trackandhackprototype_2.R;
 
 /**
@@ -75,6 +81,16 @@ public class GroupListAdapter extends BaseExpandableListAdapter {
         TextView groupView = (TextView) convertView.findViewById(R.id.groupListTitle);
         groupView.setText(groupTitle);
         groupView.setTextColor(Color.WHITE);
+
+        Button newGiftCardButton = (Button) convertView.findViewById(R.id.createNewEntryButton);
+        newGiftCardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("CLICKED", "newGiftCardButton");
+                Intent newGiftCardIntent = new Intent(v.getContext(), NewGiftCardActivity.class);
+                ((ActionBarActivity) ctx).startActivityForResult(newGiftCardIntent, 1);
+            }
+        });
 
         return convertView;
     }
