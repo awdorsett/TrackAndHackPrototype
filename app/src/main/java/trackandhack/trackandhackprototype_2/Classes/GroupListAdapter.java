@@ -86,9 +86,8 @@ public class GroupListAdapter extends BaseExpandableListAdapter {
         newGiftCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("CLICKED", "newGiftCardButton");
                 Intent newGiftCardIntent = new Intent(v.getContext(), NewGiftCardActivity.class);
-                ((ActionBarActivity) ctx).startActivityForResult(newGiftCardIntent, 1);
+                ((Activity) ctx).startActivityForResult(newGiftCardIntent, 1);
             }
         });
 

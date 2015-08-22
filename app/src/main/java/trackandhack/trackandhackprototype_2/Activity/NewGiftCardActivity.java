@@ -1,5 +1,6 @@
 package trackandhack.trackandhackprototype_2.Activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -13,13 +14,13 @@ import trackandhack.trackandhackprototype_2.Classes.GiftCard;
 import trackandhack.trackandhackprototype_2.MainActivity;
 import trackandhack.trackandhackprototype_2.R;
 
-public class NewGiftCardActivity extends ActionBarActivity {
+public class NewGiftCardActivity extends Activity {
     GiftCard giftCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gift_card);
+        setContentView(R.layout.activity_new_gift_card);
 
         Intent intent = getIntent();
 

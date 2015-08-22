@@ -1,5 +1,6 @@
 package trackandhack.trackandhackprototype_2;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -26,7 +27,7 @@ import trackandhack.trackandhackprototype_2.Classes.GroupListAdapter;
 import trackandhack.trackandhackprototype_2.Classes.Status;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
     List<Group> groupList;
     ExpandableListView groupExpandableListView;
     GroupListAdapter groupListAdapter;
@@ -38,6 +39,7 @@ public class MainActivity extends ActionBarActivity {
         Group group;
         final Intent intent = getIntent();
 
+        getActionBar().setDisplayShowTitleEnabled(false);
 
         groupExpandableListView = (ExpandableListView) findViewById(R.id.groupList);
         if (intent.hasExtra("group")) {

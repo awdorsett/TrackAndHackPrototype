@@ -2,6 +2,13 @@
 <items version="2" >
 
     <item
+        jar="/Users/andrewdorsett/Dropbox/code/track_and_hacl/TrackAndHackProtoType_2/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="/Users/andrewdorsett/Dropbox/code/track_and_hacl/TrackAndHackProtoType_2/app/build/intermediates/pre-dexed/debug/classes-1170cf299aed08556fcab54eb32a90a7b91d5855.jar" />
+    </item>
+    <item
         jar="/Users/andrewdorsett/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -9,25 +16,18 @@
         <dex dex="/Users/andrewdorsett/Dropbox/code/track_and_hacl/TrackAndHackProtoType_2/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-f90d71702aca959c08ad1980647324d3786f9498.jar" />
     </item>
     <item
-        jar="/Users/andrewdorsett/Dropbox/code/track_and_hacl/TrackAndHackProtoType_2/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
-        <dex dex="/Users/andrewdorsett/Dropbox/code/track_and_hacl/TrackAndHackProtoType_2/app/build/intermediates/pre-dexed/debug/classes-6cbf7967751d12483e7f26726893c751f877f878.jar" />
-    </item>
-    <item
-        jar="/Users/andrewdorsett/Dropbox/code/track_and_hacl/TrackAndHackProtoType_2/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/libs/internal_impl-22.0.0.jar"
+        jar="/Users/andrewdorsett/Dropbox/code/track_and_hacl/TrackAndHackProtoType_2/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/libs/internal_impl-22.0.0.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
-        <dex dex="/Users/andrewdorsett/Dropbox/code/track_and_hacl/TrackAndHackProtoType_2/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-ceb009913d933254f05ac6deed639c3ea5b83c1b.jar" />
+        <dex dex="/Users/andrewdorsett/Dropbox/code/track_and_hacl/TrackAndHackProtoType_2/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-13cdceacb16ac09828e15c473e27e171849a0b7a.jar" />
     </item>
     <item
-        jar="/Users/andrewdorsett/Dropbox/code/track_and_hacl/TrackAndHackProtoType_2/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/classes.jar"
+        jar="/Users/andrewdorsett/Dropbox/code/track_and_hacl/TrackAndHackProtoType_2/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
-        <dex dex="/Users/andrewdorsett/Dropbox/code/track_and_hacl/TrackAndHackProtoType_2/app/build/intermediates/pre-dexed/debug/classes-fe954401b4433197d5b721f69d58eaed44f00094.jar" />
+        <dex dex="/Users/andrewdorsett/Dropbox/code/track_and_hacl/TrackAndHackProtoType_2/app/build/intermediates/pre-dexed/debug/classes-ae1a47ac48afb28a2707f9d5a44bc6141b961111.jar" />
     </item>
 
 </items>

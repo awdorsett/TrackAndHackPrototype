@@ -1,5 +1,6 @@
 package trackandhack.trackandhackprototype_2.Activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -17,7 +18,7 @@ import trackandhack.trackandhackprototype_2.Classes.GiftCardStatus;
 import trackandhack.trackandhackprototype_2.MainActivity;
 import trackandhack.trackandhackprototype_2.R;
 
-public class GiftCardActivity extends ActionBarActivity {
+public class GiftCardActivity extends Activity {
     GiftCard giftCard;
     Button closeButton;
 

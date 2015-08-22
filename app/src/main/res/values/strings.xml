@@ -4,4 +4,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_gift_card">GiftCardActivity</string>
+    <string name="menu.new_gift_card">New Gift Card</string>
+    <string name="menu.new_min_spend">New Min Spend</string>
 </resources>
