@@ -10,22 +10,29 @@ import java.util.UUID;
 public abstract class Goal implements Serializable {
     Double currentAmount;
     Date endDate;
-    Status goalStatus;
     Double initialAmount;
     Date startDate;
     Status status;
     String title;
-    UUID uid;
+    Long uid;
 
     protected Goal(Double currentAmount, Date endDate, Double initialAmount, Date startDate, Status status, String title) {
         this.currentAmount = currentAmount;
         this.endDate = endDate;
-        this.goalStatus = goalStatus;
         this.initialAmount = initialAmount;
         this.startDate = startDate;
         this.status = status;
         this.title = title;
-        uid = UUID.randomUUID();
+    }
+
+    protected Goal(Long uid, Double currentAmount, Date endDate, Double initialAmount, Date startDate, Status status, String title) {
+        this.currentAmount = currentAmount;
+        this.endDate = endDate;
+        this.initialAmount = initialAmount;
+        this.startDate = startDate;
+        this.status = status;
+        this.title = title;
+        this.uid = uid;
     }
 
     public Double getCurrentAmount() {
@@ -38,14 +45,6 @@ public abstract class Goal implements Serializable {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
-    }
-
-    public Status getGoalStatus() {
-        return goalStatus;
-    }
-
-    public void setGoalStatus(Status goalStatus) {
-        this.goalStatus = goalStatus;
     }
 
     public Double getInitialAmount() {
@@ -84,18 +83,25 @@ public abstract class Goal implements Serializable {
         this.status = status;
     }
 
-    public UUID getUid() {
+    public Long getUid() {
         return uid;
+    }
+
+    public void setUid(Long uid) {
+        this.uid = uid;
     }
 
     @Override
     public int hashCode() {
-        return uid.hashCode();
+        if (uid != null) {
+            return uid.hashCode();
+        }
+        return -1;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Goal) {
+        if (obj instanceof Goal && ((Goal) obj).getUid() != -1) {
             return obj.hashCode() == hashCode();
         }
 

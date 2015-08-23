@@ -68,7 +68,7 @@ public class GiftCardActivity extends Activity {
         TextView initialAmount = (TextView) findViewById(R.id.initialAmountText);
 
         title.setText(giftCard.getTitle());
-        digits.setText(Integer.toString(giftCard.getDigits()));
+        digits.setText(giftCard.getDigits());
         currentAmount.setText(Double.toString(giftCard.getCurrentAmount()));
         initialAmount.setText(Double.toString(giftCard.getInitialAmount()));
 

@@ -2,6 +2,7 @@ package trackandhack.trackandhackprototype_2.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -9,7 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.database.*;
 
+import trackandhack.trackandhackprototype_2.Classes.DBHelper;
 import trackandhack.trackandhackprototype_2.Classes.GiftCard;
 import trackandhack.trackandhackprototype_2.MainActivity;
 import trackandhack.trackandhackprototype_2.R;
@@ -21,6 +24,8 @@ public class NewGiftCardActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_gift_card);
+
+
         getActionBar().setTitle("Add New Gift Card");
 
         Intent intent = getIntent();
@@ -90,7 +95,7 @@ public class NewGiftCardActivity extends Activity {
         EditText amount = (EditText) findViewById(R.id.amountInput);
         EditText title = (EditText) findViewById(R.id.titleInput);
 
-        giftCard.setDigits(Integer.parseInt(digits.getText().toString()));
+        giftCard.setDigits(digits.getText().toString());
         giftCard.setFee(Double.parseDouble(fee.getText().toString()));
         giftCard.setInitialAmount(Double.parseDouble(amount.getText().toString()));
         giftCard.setCurrentAmount(Double.parseDouble(amount.getText().toString()));

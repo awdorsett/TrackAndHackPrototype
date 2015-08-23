@@ -6,7 +6,7 @@ import java.util.Date;
  * Created by andrewdorsett on 8/15/15.
  */
 public class GiftCard extends Goal {
-    Integer digits;
+    String digits;
     Double fee;
 
     static public GiftCard clone(GiftCard original) {
@@ -24,11 +24,17 @@ public class GiftCard extends Goal {
     }
 
     public GiftCard() {
-        this(0.0, 0, null, 0.0, 0.0, null, GiftCardStatus.OPEN, "");
+        this(0.0, "0", null, 0.0, 0.0, null, GiftCardStatus.OPEN, "");
     }
 
-    public GiftCard(Double currentAmount, Integer digits, Date endDate, Double fee, Double initialAmount, Date startDate, GiftCardStatus status, String title) {
+    public GiftCard(Double currentAmount, String digits, Date endDate, Double fee, Double initialAmount, Date startDate, GiftCardStatus status, String title) {
         super(currentAmount, endDate, initialAmount, startDate, status, title);
+        this.digits = digits;
+        this.fee = fee;
+    }
+
+    public GiftCard(Long id, Double currentAmount, String digits, Date endDate, Double fee, Double initialAmount, Date startDate, GiftCardStatus status, String title) {
+        super(id, currentAmount, endDate, initialAmount, startDate, status, title);
         this.digits = digits;
         this.fee = fee;
     }
@@ -41,11 +47,11 @@ public class GiftCard extends Goal {
         this.fee = fee;
     }
 
-    public Integer getDigits() {
+    public String getDigits() {
         return digits;
     }
 
-    public void setDigits(Integer digits) {
+    public void setDigits(String digits) {
         this.digits = digits;
     }
 
