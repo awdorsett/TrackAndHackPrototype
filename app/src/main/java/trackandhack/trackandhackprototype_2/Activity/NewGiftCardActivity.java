@@ -19,6 +19,7 @@ import trackandhack.trackandhackprototype_2.R;
 
 public class NewGiftCardActivity extends Activity {
     GiftCard giftCard;
+    String DEFAULT_TITLE = "Gift Card";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,11 +97,16 @@ public class NewGiftCardActivity extends Activity {
         EditText title = (EditText) findViewById(R.id.titleInput);
         EditText notes = (EditText) findViewById(R.id.notesInput);
 
+        if (title.getText().toString().equals("")) {
+            giftCard.setTitle(DEFAULT_TITLE + " - " + digits.getText().toString());
+        } else {
+            giftCard.setTitle(title.getText().toString());
+        }
+
         giftCard.setDigits(digits.getText().toString());
         giftCard.setFee(Double.parseDouble(fee.getText().toString()));
         giftCard.setInitialAmount(Double.parseDouble(amount.getText().toString()));
         giftCard.setCurrentAmount(Double.parseDouble(amount.getText().toString()));
-        giftCard.setTitle(title.getText().toString());
         giftCard.setNotes(notes.getText().toString());
 
         return true;

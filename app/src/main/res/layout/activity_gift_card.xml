@@ -10,7 +10,7 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="1">
+        android:layout_weight="10">
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -41,6 +41,46 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Digits"
                 android:id="@+id/digitsText" />
+
+            <ProgressBar
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/progressBar"
+                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_weight="1"
+                android:indeterminate="false" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="00000"
+                    android:id="@+id/currentAmountText"
+                    android:layout_toLeftOf="@+id/amountDivider" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="/"
+                    android:id="@+id/amountDivider"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="000000"
+                    android:layout_toRightOf="@id/amountDivider"
+                    android:id="@+id/initialAmountText" />
+            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
 
@@ -48,54 +88,15 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="1">
+        android:layout_weight="11">
 
-        <ProgressBar
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/progressBar"
-            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_weight="1"
-            android:indeterminate="false" />
-
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="00000"
-                android:id="@+id/currentAmountText"
-                android:layout_toLeftOf="@+id/amountDivider" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="/"
-                android:id="@+id/amountDivider"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="000000"
-                android:layout_toRightOf="@id/amountDivider"
-                android:id="@+id/initialAmountText" />
-        </RelativeLayout>
     </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="1">
+        android:layout_weight="10">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -157,22 +158,22 @@
                 android:id="@+id/adjustmentButton"
                 android:layout_weight="2" />
         </LinearLayout>
-    </LinearLayout>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Close"
-        android:id="@+id/closeButton"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="75dp"
-        android:layout_marginRight="75dp" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Close"
+            android:id="@+id/closeButton"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="75dp"
+            android:layout_marginRight="75dp" />
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="1">
+        android:layout_weight="10">
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -180,14 +181,22 @@
             android:layout_weight="1">
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Notes"
+                android:id="@+id/notesLabel"
+                android:layout_marginLeft="50dp" />
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/notesText"
+                android:nestedScrollingEnabled="true"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:nestedScrollingEnabled="true" />
+                android:layout_below="@+id/notesLabel" />
+
         </RelativeLayout>
 
     </LinearLayout>
@@ -196,7 +205,7 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="1">
+        android:layout_weight="11">
 
         <Button
             android:layout_width="wrap_content"
