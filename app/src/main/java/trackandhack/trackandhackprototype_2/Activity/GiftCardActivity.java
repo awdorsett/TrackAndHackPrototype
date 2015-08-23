@@ -66,11 +66,13 @@ public class GiftCardActivity extends Activity {
         TextView digits = (TextView) findViewById(R.id.digitsText);
         TextView currentAmount = (TextView) findViewById(R.id.currentAmountText);
         TextView initialAmount = (TextView) findViewById(R.id.initialAmountText);
+        TextView notes = (TextView) findViewById(R.id.notesText);
 
         title.setText(giftCard.getTitle());
         digits.setText(giftCard.getDigits());
         currentAmount.setText(Double.toString(giftCard.getCurrentAmount()));
         initialAmount.setText(Double.toString(giftCard.getInitialAmount()));
+        notes.setText(giftCard.getNotes());
 
         progressBar.setMax((int) Math.ceil(giftCard.getInitialAmount()));
         progressBar.setProgress((int) Math.ceil(giftCard.getCurrentAmount()));
