@@ -94,12 +94,14 @@ public class NewGiftCardActivity extends Activity {
         EditText fee = (EditText) findViewById(R.id.feeInput);
         EditText amount = (EditText) findViewById(R.id.amountInput);
         EditText title = (EditText) findViewById(R.id.titleInput);
+        EditText notes = (EditText) findViewById(R.id.notesInput);
 
         giftCard.setDigits(digits.getText().toString());
         giftCard.setFee(Double.parseDouble(fee.getText().toString()));
         giftCard.setInitialAmount(Double.parseDouble(amount.getText().toString()));
         giftCard.setCurrentAmount(Double.parseDouble(amount.getText().toString()));
         giftCard.setTitle(title.getText().toString());
+        giftCard.setNotes(notes.getText().toString());
 
         return true;
     }

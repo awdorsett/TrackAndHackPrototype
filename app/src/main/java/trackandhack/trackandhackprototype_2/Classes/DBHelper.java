@@ -84,6 +84,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         contentValues.put("status", goal.getStatus().getName());
         contentValues.put("title", goal.getTitle());
+        contentValues.put("notes", goal.getNotes());
 
         Long row = db.insert("Goals", null, contentValues);
         if (row != -1) {
@@ -109,8 +110,10 @@ public class DBHelper extends SQLiteOpenHelper {
             }
             gc.setStatus(GiftCardStatus.valueOf(rs.getString(5).toUpperCase()));
             gc.setTitle(rs.getString(6));
-            gc.setDigits(rs.getString(7));
-            gc.setFee(rs.getDouble(8));
+            gc.setNotes(rs.getString(7));
+            gc.setDigits(rs.getString(8));
+            gc.setFee(rs.getDouble(9));
+
 
             return gc;
         } catch (Exception e) {

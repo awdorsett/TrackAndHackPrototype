@@ -15,8 +15,8 @@
         android:padding="10dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:layout_marginBottom="50dp"
-        android:layout_margin="50dp">
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp">
 
         <EditText
             android:layout_width="70dp"
@@ -149,7 +149,44 @@
             android:id="@+id/titleInputLabel"
             android:layout_above="@+id/titleInput"
             android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp" />
+            android:layout_marginRight="50dp"
+            android:layout_alignParentLeft="false" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.22">
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/notesInput"
+            android:layout_weight="1"
+            android:lines="4"
+            android:layout_alignParentBottom="false"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentStart="false"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:nestedScrollingEnabled="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Notes"
+            android:id="@+id/notesInputLabel"
+            android:layout_above="@+id/notesInput"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_alignParentBottom="false" />
 
     </RelativeLayout>
 
@@ -157,13 +194,7 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"></LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_weight=".5">
 
         <Button
             android:layout_width="wrap_content"

@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public class MinSpend extends Goal {
 
-    protected MinSpend(Double currentAmount, Date endDate, Double initialAmount, Date startDate, Status status, String title) {
-        super(currentAmount, endDate, initialAmount, startDate, status, title);
+    protected MinSpend(Double currentAmount, Date endDate, Double initialAmount, Date startDate, Status status, String title, String notes) {
+        super(currentAmount, endDate, initialAmount, startDate, status, title, notes);
     }
 }

@@ -13,7 +13,8 @@ public class DBHelperModule {
             "initialAmount DOUBLE," +
             "startDate TEXT," +
             "status TEXT," +
-            "title TEXT);";
+            "title TEXT," +
+            "notes VARCHAR(255));";
     public static String CREATE_GC_QUERY = "CREATE TABLE IF NOT EXISTS GiftCards(" +
             "id INTEGER PRIMARY KEY," +
             "digits TEXT," +

@@ -68,7 +68,8 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="00000"
-                android:id="@+id/currentAmountText" />
+                android:id="@+id/currentAmountText"
+                android:layout_toLeftOf="@+id/amountDivider" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -158,6 +159,15 @@
         </LinearLayout>
     </LinearLayout>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Close"
+        android:id="@+id/closeButton"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="75dp"
+        android:layout_marginRight="75dp" />
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
@@ -169,36 +179,17 @@
             android:layout_height="fill_parent"
             android:layout_weight="1">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Close"
-                android:id="@+id/closeButton"
-                android:layout_centerInParent="true" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/notesText"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:nestedScrollingEnabled="true" />
         </RelativeLayout>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1">
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Start Date"
-                android:id="@+id/startDateText"
-                android:layout_weight="1" />
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="End Date"
-                android:id="@+id/endDateText"
-                android:layout_weight="1" />
-        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout

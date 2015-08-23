@@ -46,7 +46,6 @@ public class MainActivity extends Activity {
         Group group;
         final Intent intent = getIntent();
         SQLiteDatabase db = openOrCreateDatabase("card_db", MODE_PRIVATE, null);
-
         dbHelper.setDb(db);
 
         getActionBar().setDisplayShowTitleEnabled(false);
@@ -112,9 +111,9 @@ public class MainActivity extends Activity {
 
         if (gcList.size() == 0) {
             Log.d("DATABASE", "list was empty");
-            GiftCard gc = new GiftCard(500.0, "1234", null, 3.95, 500.0, null, GiftCardStatus.OPEN, "GiftCard - x1234");
-            GiftCard gc2 = new GiftCard(500.0, "9999", null, 3.95, 500.0, null, GiftCardStatus.OPEN, "GiftCard - x9999");
-            GiftCard gc3 = new GiftCard(500.0, "5550", null, 3.95, 500.0, null, GiftCardStatus.OPEN, "GiftCard - x5550");
+            GiftCard gc = new GiftCard(500.0, "1234", null, 3.95, 500.0, null, GiftCardStatus.OPEN, "GiftCard - x1234", "Here are some notes");
+            GiftCard gc2 = new GiftCard(500.0, "9999", null, 3.95, 500.0, null, GiftCardStatus.OPEN, "GiftCard - x9999", null);
+            GiftCard gc3 = new GiftCard(500.0, "5550", null, 3.95, 500.0, null, GiftCardStatus.OPEN, "GiftCard - x5550", "Something something something");
             dbHelper.insertGiftCard(gc);
             dbHelper.insertGiftCard(gc2);
             dbHelper.insertGiftCard(gc3);

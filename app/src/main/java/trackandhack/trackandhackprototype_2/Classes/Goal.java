@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
+// TODO add in check for notes length
 /**
  * Created by andrewdorsett on 8/15/15.
  */
@@ -14,18 +15,20 @@ public abstract class Goal implements Serializable {
     Date startDate;
     Status status;
     String title;
+    String notes;
     Long uid;
 
-    protected Goal(Double currentAmount, Date endDate, Double initialAmount, Date startDate, Status status, String title) {
+    protected Goal(Double currentAmount, Date endDate, Double initialAmount, Date startDate, Status status, String title, String notes) {
         this.currentAmount = currentAmount;
         this.endDate = endDate;
         this.initialAmount = initialAmount;
         this.startDate = startDate;
         this.status = status;
         this.title = title;
+        this.notes = notes;
     }
 
-    protected Goal(Long uid, Double currentAmount, Date endDate, Double initialAmount, Date startDate, Status status, String title) {
+    protected Goal(Long uid, Double currentAmount, Date endDate, Double initialAmount, Date startDate, Status status, String title, String notes) {
         this.currentAmount = currentAmount;
         this.endDate = endDate;
         this.initialAmount = initialAmount;
@@ -33,6 +36,7 @@ public abstract class Goal implements Serializable {
         this.status = status;
         this.title = title;
         this.uid = uid;
+        this.notes = notes;
     }
 
     public Double getCurrentAmount() {
@@ -89,6 +93,14 @@ public abstract class Goal implements Serializable {
 
     public void setUid(Long uid) {
         this.uid = uid;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     @Override

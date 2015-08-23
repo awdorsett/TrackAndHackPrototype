@@ -18,23 +18,24 @@ public class GiftCard extends Goal {
                 original.getInitialAmount(),
                 original.getStartDate(),
                 GiftCardStatus.OPEN,
+                null,
                 null
         );
 
     }
 
     public GiftCard() {
-        this(0.0, "0", null, 0.0, 0.0, null, GiftCardStatus.OPEN, "");
+        this(0.0, "0", null, 0.0, 0.0, null, GiftCardStatus.OPEN, "", null);
     }
 
-    public GiftCard(Double currentAmount, String digits, Date endDate, Double fee, Double initialAmount, Date startDate, GiftCardStatus status, String title) {
-        super(currentAmount, endDate, initialAmount, startDate, status, title);
+    public GiftCard(Double currentAmount, String digits, Date endDate, Double fee, Double initialAmount, Date startDate, GiftCardStatus status, String title, String notes) {
+        super(currentAmount, endDate, initialAmount, startDate, status, title, notes);
         this.digits = digits;
         this.fee = fee;
     }
 
-    public GiftCard(Long id, Double currentAmount, String digits, Date endDate, Double fee, Double initialAmount, Date startDate, GiftCardStatus status, String title) {
-        super(id, currentAmount, endDate, initialAmount, startDate, status, title);
+    public GiftCard(Long id, Double currentAmount, String digits, Date endDate, Double fee, Double initialAmount, Date startDate, GiftCardStatus status, String title, String notes) {
+        super(id, currentAmount, endDate, initialAmount, startDate, status, title, notes);
         this.digits = digits;
         this.fee = fee;
     }
