@@ -138,6 +138,7 @@
                 android:textOff=""
                 android:checked="true"
                 android:layout_weight="2"
+                android:switchMinWidth="70dp"
                 android:layout_marginLeft="5dp" />
 
             <EditText
@@ -193,7 +194,8 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
                 android:layout_below="@+id/notesLabel"
-                android:textSize="10dp" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="#ffffff" />
 
         </RelativeLayout>
 
