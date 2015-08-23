@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -82,14 +83,6 @@ public class GroupListAdapter extends BaseExpandableListAdapter {
         groupView.setText(groupTitle);
         groupView.setTextColor(Color.WHITE);
 
-        Button newGiftCardButton = (Button) convertView.findViewById(R.id.createNewEntryButton);
-        newGiftCardButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent newGiftCardIntent = new Intent(v.getContext(), NewGiftCardActivity.class);
-                ((Activity) ctx).startActivityForResult(newGiftCardIntent, 1);
-            }
-        });
 
         return convertView;
     }
@@ -103,6 +96,8 @@ public class GroupListAdapter extends BaseExpandableListAdapter {
         }
 
         TextView childView = (TextView) convertView.findViewById(R.id.goalListElement);
+        ImageView icon = (ImageView) convertView.findViewById(R.id.goalListIcon);
+        icon.setImageResource(R.drawable.ic_card_giftcard_white_24dp);
         childView.setText(goalTitle);
 
         return convertView;

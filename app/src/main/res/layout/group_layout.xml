@@ -3,7 +3,9 @@
     android:orientation="horizontal"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/background_material_dark">
+    android:background="@color/background_material_dark"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
 
     <TextView
         android:id="@+id/groupListTitle"
@@ -12,14 +14,9 @@
         android:textStyle="bold"
         android:textSize="20dp"
         android:layout_marginLeft="30dp"
-        android:layout_weight="20" />
+        android:layout_weight="20"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="+"
-        android:focusable="false"
-        android:id="@+id/createNewEntryButton" />
 
 </LinearLayout>

@@ -2,8 +2,10 @@ package trackandhack.trackandhackprototype_2;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -31,7 +33,7 @@ public class MainActivity extends Activity {
     List<Group> groupList;
     ExpandableListView groupExpandableListView;
     GroupListAdapter groupListAdapter;
-
+    DrawerLayout navDrawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,7 @@ public class MainActivity extends Activity {
         getActionBar().setDisplayShowTitleEnabled(false);
 
         groupExpandableListView = (ExpandableListView) findViewById(R.id.groupList);
+
         if (intent.hasExtra("group")) {
             group = (Group) intent.getSerializableExtra("group");
         } else {
@@ -86,7 +89,10 @@ public class MainActivity extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.menu_gift_card) {
+            Intent newGiftCardIntent = new Intent(this, NewGiftCardActivity.class);
+            startActivityForResult(newGiftCardIntent, 1);
+
             return true;
         }
 

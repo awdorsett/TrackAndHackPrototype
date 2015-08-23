@@ -12,27 +12,31 @@
         android:layout_height="0dp"
         android:layout_weight="3"
         android:background="@drawable/rectangle"
-        android:layout_margin="50dp"
-        android:padding="20dp">
+        android:padding="10dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="50dp"
+        android:layout_margin="50dp">
 
         <EditText
-            android:layout_width="50dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:ems="10"
             android:id="@+id/digitsInput"
             android:layout_alignParentLeft="false"
             android:layout_centerInParent="true"
-            android:layout_alignParentRight="true" />
+            android:layout_alignParentRight="true"
+            android:numeric="decimal" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Last 4 Digits"
-            android:layout_alignTop="@id/digitsInput"
             android:id="@+id/digitsLabel"
-            android:layout_alignRight="@id/digitsInput" />
+            android:layout_alignRight="@+id/digitsInput"
+            android:layout_above="@+id/digitsInput" />
 
         <EditText
             android:layout_width="100dp"
@@ -46,35 +50,42 @@
             android:layout_centerHorizontal="true"
             android:layout_alignWithParentIfMissing="false"
             android:layout_alignParentEnd="false"
-            android:layout_alignParentStart="false" />
+            android:layout_alignParentStart="false"
+            android:layout_alignParentLeft="false"
+            android:layout_toRightOf="@+id/checkBox_dup_amount" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Amount"
-            android:layout_alignTop="@id/amountInput"
             android:id="@+id/amountLabel"
-            android:layout_alignRight="@id/amountInput" />
+            android:layout_alignRight="@id/amountInput"
+            android:layout_above="@+id/amountInput"
+            android:layout_alignLeft="@+id/amountInput"
+            android:layout_alignParentStart="false"
+            android:inputType="textCapSentences"
+            android:gravity="center_horizontal" />
 
 
         <EditText
-            android:layout_width="50dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:ems="10"
             android:id="@+id/feeInput"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Fee"
-            android:layout_alignTop="@id/feeInput"
             android:id="@+id/feeLabel"
-            android:layout_alignRight="@id/feeInput" />
+            android:layout_alignRight="@id/feeInput"
+            android:layout_above="@+id/feeInput"
+            android:gravity="center_horizontal" />
 
 
 
@@ -87,6 +98,24 @@
             android:id="@+id/giftCardTitle"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkBox_dup_amount"
+            android:layout_alignParentStart="false"
+            android:checked="true"
+            android:layout_alignBaseline="@+id/amountInput"
+            android:layout_alignParentLeft="true" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkBox_dup_fee"
+            android:layout_alignParentStart="false"
+            android:checked="true"
+            android:layout_alignBaseline="@+id/feeInput"
+            android:layout_toLeftOf="@+id/feeInput" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -99,14 +128,28 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/titleInput"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkBox_dup_title"
+            android:checked="true"
+            android:layout_alignBaseline="@+id/titleInput"
+            android:layout_marginLeft="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Title"
-            android:id="@+id/titleInputLabel" />
+            android:id="@+id/titleInputLabel"
+            android:layout_above="@+id/titleInput"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp" />
 
     </RelativeLayout>
 

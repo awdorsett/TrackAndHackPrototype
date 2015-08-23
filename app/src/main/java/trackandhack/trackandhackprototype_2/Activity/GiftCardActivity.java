@@ -27,6 +27,9 @@ public class GiftCardActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gift_card);
         Intent intent = getIntent();
+
+        getActionBar().setDisplayShowTitleEnabled(false);
+
         if (intent.hasExtra("giftCard")) {
             giftCard = (GiftCard) intent.getSerializableExtra("giftCard");
         }

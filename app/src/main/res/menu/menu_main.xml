@@ -1,11 +1,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_add_new"
+        android:title="@string/menu.add_new"
+        android:showAsAction="always|withText"/>
     <item android:id="@+id/menu_gift_card"
         android:icon="@drawable/ic_card_giftcard_white_24dp"
         android:title="@string/menu.new_gift_card"
-        android:showAsAction="always"/>
+        android:showAsAction="always|withText"/>
     <item android:id="@+id/menu_min_spend"
         android:icon="@drawable/ic_credit_card_white_48dp"
         android:title="@string/menu.new_min_spend"
-        android:showAsAction="always"/>
+        android:showAsAction="always|withText"/>
 </menu>
