@@ -19,7 +19,7 @@
             android:layout_weight="2"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="50dp"
             android:layout_marginLeft="20dp"></RelativeLayout>
 
         <LinearLayout
@@ -33,14 +33,17 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Title"
-                android:id="@+id/titleText" />
+                android:id="@+id/titleText"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Digits"
-                android:id="@+id/digitsText" />
+                android:id="@+id/digitsText"
+                android:layout_marginLeft="5dp" />
 
             <ProgressBar
                 android:layout_width="fill_parent"
@@ -88,45 +91,38 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="11">
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
         android:layout_weight="10">
 
-        <LinearLayout
+        <RelativeLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1">
 
             <TextView
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="+    -"
+                android:text="+        -"
                 android:id="@+id/addSubLabel"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:layout_alignParentStart="false"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="10dp" />
 
             <TextView
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Amount"
                 android:id="@+id/adjustmentLabel"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="false" />
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/textView2"
-                android:layout_weight="1" />
-        </LinearLayout>
+        </RelativeLayout>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -141,7 +137,8 @@
                 android:textOn=""
                 android:textOff=""
                 android:checked="true"
-                android:layout_weight="2" />
+                android:layout_weight="2"
+                android:layout_marginLeft="5dp" />
 
             <EditText
                 android:layout_width="fill_parent"
@@ -195,7 +192,8 @@
                 android:nestedScrollingEnabled="true"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
-                android:layout_below="@+id/notesLabel" />
+                android:layout_below="@+id/notesLabel"
+                android:textSize="10dp" />
 
         </RelativeLayout>
 
@@ -212,14 +210,16 @@
             android:layout_height="wrap_content"
             android:text="Done"
             android:id="@+id/doneButton"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:layout_gravity="bottom" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Edit"
             android:id="@+id/editButton"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:layout_gravity="bottom" />
     </LinearLayout>
 
 </LinearLayout>
