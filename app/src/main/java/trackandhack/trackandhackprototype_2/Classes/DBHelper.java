@@ -16,16 +16,25 @@ import java.util.List;
 
 import trackandhack.trackandhackprototype_2.Module.DBHelperModule;
 
+
 /**
  * Created by andrewdorsett on 8/22/15.
  */
 public class DBHelper extends SQLiteOpenHelper {
+    private static DBHelper instance = null;
     SQLiteDatabase db;
     SimpleDateFormat iso8601Format = new SimpleDateFormat(
             "yyyy-MM-dd HH:mm:ss");
 
-    public DBHelper(Context context){
+    private DBHelper(Context context){
         super(context, "card_db", null, 1);
+    }
+
+    public static DBHelper getInstance(Context context) {
+        if (instance == null && context != null) {
+            instance = new DBHelper(context);
+        }
+        return instance;
     }
 
     public void onCreate(SQLiteDatabase db) {}
@@ -40,19 +49,26 @@ public class DBHelper extends SQLiteOpenHelper {
     private void setupTables() {
         db.execSQL(DBHelperModule.CREATE_GOALS_QUERY);
         db.execSQL(DBHelperModule.CREATE_GC_QUERY);
+        db.execSQL(DBHelperModule.CREATE_MS_QUERY);
     }
 
     public List<?> getEntries(GoalType type) {
         ArrayList<Goal> entries = new ArrayList<>();
         if (type.equals(GoalType.GIFT_CARD)) {
-            Log.d("DATABASE", "Result set is gift card");
             Cursor resultSet = db.rawQuery(DBHelperModule.GET_GC_QUERY, null);
 
             while (resultSet.moveToNext()) {
-                Log.d("DATABASE", "Has next");
                 GiftCard gc = getGiftCardEntry(resultSet);
                 if (gc != null) {
-                    Log.d("DATABASE", "gc was not null");
+                    entries.add(gc);
+                }
+            }
+        } else if (type.equals(GoalType.MIN_SPEND)) {
+            Cursor resultSet = db.rawQuery(DBHelperModule.GET_MS_QUERY, null);
+
+            while (resultSet.moveToNext()) {
+                MinSpend gc = getMinSpendEntry(resultSet);
+                if (gc != null) {
                     entries.add(gc);
                 }
             }
@@ -92,6 +108,33 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+    private MinSpend getMinSpendEntry (Cursor rs) {
+        MinSpend ms = new MinSpend();
+        try {
+            ms.setUid(rs.getLong(0));
+            ms.setCurrentAmount(rs.getDouble(1));
+            if (rs.getString(2) != null) {
+                ms.setEndDate(iso8601Format.parse(rs.getString(2)));
+            } else {
+                ms.setEndDate(null);
+            }
+            ms.setInitialAmount(rs.getDouble(3));
+            if (rs.getString(4) != null) {
+                ms.setStartDate(iso8601Format.parse(rs.getString(4)));
+            } else {
+                ms.setStartDate(null);
+            }
+            ms.setStatus(MinSpendStatus.valueOf(rs.getString(5).toUpperCase()));
+            ms.setTitle(rs.getString(6));
+            ms.setNotes(rs.getString(7));
+            ms.setBonus(rs.getDouble(8));
+
+            return ms;
+        } catch (Exception e) {
+            Log.d("DATABASE", "EXCEPTION! " + e);
+            return null;
+        }
+    }
     private GiftCard getGiftCardEntry (Cursor rs) {
         GiftCard gc = new GiftCard();
         try {
@@ -120,5 +163,14 @@ public class DBHelper extends SQLiteOpenHelper {
             Log.d("DATABASE", "EXCEPTION! " + e);
             return null;
         }
+    }
+
+    public void insertMinSpend(MinSpend ms) {
+        ContentValues contentValues = new ContentValues();
+        insertGoal(ms);
+
+        contentValues.put("id", ms.getUid());
+        contentValues.put("bonus", ms.getBonus());
+        db.insert("MinSpends", null, contentValues);
     }
 }

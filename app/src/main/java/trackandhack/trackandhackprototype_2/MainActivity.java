@@ -31,6 +31,7 @@ import trackandhack.trackandhackprototype_2.Classes.GoalType;
 import trackandhack.trackandhackprototype_2.Classes.Group;
 import trackandhack.trackandhackprototype_2.Classes.GroupListAdapter;
 import trackandhack.trackandhackprototype_2.Classes.Status;
+import trackandhack.trackandhackprototype_2.Module.GroupModule;
 
 
 public class MainActivity extends Activity {
@@ -38,35 +39,25 @@ public class MainActivity extends Activity {
     ExpandableListView groupExpandableListView;
     GroupListAdapter groupListAdapter;
     DrawerLayout navDrawer;
-    DBHelper dbHelper = new DBHelper(this);
+    DBHelper dbHelper =  DBHelper.getInstance(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Group group;
-        final Intent intent = getIntent();
         SQLiteDatabase db = openOrCreateDatabase("card_db", MODE_PRIVATE, null);
+//        db.execSQL("DROP TABLE Goals");
+//        db.execSQL("DROP TABLE GiftCards");
+//        db.execSQL("DROP TABLE MinSpends");
+
         dbHelper.setDb(db);
 
         getActionBar().setDisplayShowTitleEnabled(false);
 
         groupExpandableListView = (ExpandableListView) findViewById(R.id.groupList);
 
-        if (intent.hasExtra("group")) {
-            group = (Group) intent.getSerializableExtra("group");
-        } else {
-            group = DataProvider.getTempGroup();
-        }
-
-        if(intent.hasExtra("goalList")) {
-            group.setGoalList((ArrayList<Goal>) intent.getSerializableExtra("goalList"));
-        } else {
-            group.setGoalList(getDemoGiftCardList());
-        }
-
-        groupList = new ArrayList<>();
-        groupList.add(group);
+        groupList = GroupModule.groups;
+        getEntriesForGroups();
         groupListAdapter = new GroupListAdapter(this, groupList);
         groupExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
@@ -138,24 +129,27 @@ public class MainActivity extends Activity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            if (data.hasExtra("giftCard")) {
-                GiftCard giftCard = (GiftCard) data.getSerializableExtra("giftCard");
-                Group group = (Group) groupListAdapter.getGroup(0);
-                ArrayList<Goal> gcList = (ArrayList<Goal>) group.getGoalList();
-                int position = gcList.size() - 1;
-                if (gcList.contains(giftCard)) {
-                    position = gcList.indexOf(giftCard);
-                    gcList.remove(giftCard);
-                } else {
-                    dbHelper.insertGiftCard(giftCard);
-                }
-                gcList.add(position, giftCard);
+            if (data.hasExtra("updated")) {
                 Intent intent = new Intent(this, MainActivity.class);
-                intent.putExtra("group", group);
-                intent.putExtra("goalList", gcList);
-
                 startActivity(intent);
             }
+        }
+    }
+
+    private Group getGroupByType(String id) {
+        GroupModule.GroupType type = GroupModule.GroupType.valueOf(id);
+        for (int i = 0; i < groupList.size(); i++) {
+            if (groupList.get(i).getType().equals(type)) {
+                return groupList.get(i);
+            }
+        }
+
+        return null;
+    }
+
+    private void getEntriesForGroups() {
+        for(Group group : groupList) {
+            group.setGoalList(dbHelper.getEntries(group.getGoalType()));
         }
     }
 }

@@ -54,7 +54,7 @@
                         <EditText
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/editText"
+                            android:id="@+id/titleInput"
                             android:layout_below="@+id/textView"
                             android:layout_marginLeft="20dp"
                             android:layout_marginRight="20dp" />
@@ -233,7 +233,8 @@
                 android:id="@+id/bonusInput"
                 android:layout_below="@+id/bonusLabel"
                 android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp" />
+                android:layout_marginRight="5dp"
+                android:enabled="false" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -300,7 +301,8 @@
             android:layout_weight="1"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_gravity="bottom" />
+            android:layout_gravity="bottom"
+            android:onClick="submitMinSpend" />
     </LinearLayout>
 
 </LinearLayout>

@@ -19,5 +19,13 @@ public class DBHelperModule {
             "id INTEGER PRIMARY KEY," +
             "digits TEXT," +
             "fee DOUBLE);";
-    public static String GET_GC_QUERY = "SELECT Goals.id AS id, currentAmount, endDate, initialAmount, startDate, status, title, digits, fee  FROM Goals INNER JOIN GiftCards ON Goals.id = GiftCards.id;";
+    public static String GET_GC_QUERY = "SELECT Goals.id AS id, currentAmount, endDate, initialAmount, startDate, status, title, notes, digits, fee  FROM Goals INNER JOIN GiftCards ON Goals.id = GiftCards.id;";
+    public static String GET_MS_QUERY = "SELECT Goals.id AS id, currentAmount, endDate, initialAmount, startDate, status, title, notes, bonus  FROM Goals INNER JOIN MinSpends ON Goals.id = MinSpends.id;";
+
+    public static String CREATE_MS_QUERY = "CREATE TABLE IF NOT EXISTS MinSpends(" +
+            "id INTEGER PRIMARY KEY," +
+            "bonus DOUBLE);";
+
+
+
 }

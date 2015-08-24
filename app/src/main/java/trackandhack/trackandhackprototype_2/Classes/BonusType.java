@@ -3,18 +3,17 @@ package trackandhack.trackandhackprototype_2.Classes;
 /**
  * Created by andrewdorsett on 8/15/15.
  */
-public enum GoalType {
-    GIFT_CARD("gift_card"),
-    MIN_SPEND("min_spend");
+public enum BonusType {
+    CASH("cash"),
+    POINTS("points");
 
-    private final String name;
+    String name;
 
-    GoalType(final String name) {
+    BonusType(String name) {
         this.name = name;
     }
 
     public String getName() {
         return name;
     }
-
 }
