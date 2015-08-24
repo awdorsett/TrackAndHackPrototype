@@ -146,8 +146,10 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/adjustmentInput"
                 android:layout_weight="1"
-                android:numeric="integer"
-                android:inputType="number" />
+                android:numeric="integer|decimal"
+                android:inputType="number|numberDecimal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp" />
 
             <Button
                 android:layout_width="fill_parent"

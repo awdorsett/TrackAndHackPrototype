@@ -19,4 +19,14 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_example">Example action</string>
+
+    <!-- Field Strings -->
+    <string name="goal_title">Title</string>
+    <string name="goal_start">Start</string>
+    <string name="goal_end">End</string>
+    <string name="goal_amount">Amount</string>
+    <string name="goal_currentAmount">Current</string>
+    <string name="goal_bonus">Bonus</string>
+    <string name="goal_type">Type</string>
+    <string name="goal_notes">Notes</string>
 </resources>
