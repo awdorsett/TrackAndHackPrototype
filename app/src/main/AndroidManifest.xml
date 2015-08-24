@@ -24,6 +24,10 @@
             android:name=".Activity.NewGiftCardActivity"
             android:label="@string/title_activity_gift_card" >
         </activity>
+        <activity
+            android:name=".Activity.NewMinSpendActivity"
+            android:label="@string/title_activity_gift_card" >
+        </activity>
     </application>
 
 </manifest>

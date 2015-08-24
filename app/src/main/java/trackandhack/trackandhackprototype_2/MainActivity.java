@@ -22,6 +22,7 @@ import java.util.List;
 
 import trackandhack.trackandhackprototype_2.Activity.GiftCardActivity;
 import trackandhack.trackandhackprototype_2.Activity.NewGiftCardActivity;
+import trackandhack.trackandhackprototype_2.Activity.NewMinSpendActivity;
 import trackandhack.trackandhackprototype_2.Classes.DBHelper;
 import trackandhack.trackandhackprototype_2.Classes.GiftCard;
 import trackandhack.trackandhackprototype_2.Classes.GiftCardStatus;
@@ -99,6 +100,11 @@ public class MainActivity extends Activity {
         if (id == R.id.menu_gift_card) {
             Intent newGiftCardIntent = new Intent(this, NewGiftCardActivity.class);
             startActivityForResult(newGiftCardIntent, 1);
+
+            return true;
+        } else if (id == R.id.menu_min_spend) {
+            Intent newMinSpendIntent = new Intent(this, NewMinSpendActivity.class);
+            startActivityForResult(newMinSpendIntent, 1);
 
             return true;
         }

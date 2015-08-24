@@ -78,13 +78,33 @@
                                 android:layout_marginLeft="20dp"
                                 android:text="@string/goal_start" />
 
-                            <EditText
-                                android:layout_width="fill_parent"
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/startDateInput"
-                                android:inputType="date"
-                                android:layout_marginLeft="20dp"
-                                android:layout_below="@+id/startDateLabel" />
+                                android:layout_below="@+id/startDateLabel">
+
+                                <EditText
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/startDateInput"
+                                    android:inputType="date"
+                                    android:layout_below="@+id/startDateLabel"
+                                    android:layout_weight="1"
+                                    android:layout_marginLeft="20dp"
+                                    android:textSize="14dp" />
+
+                                <ImageButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="fill_parent"
+                                    android:id="@+id/startDateButton"
+                                    android:layout_toRightOf="@+id/startDateInput"
+                                    android:layout_below="@+id/startDateLabel"
+                                    android:background="@drawable/ic_today_white_48dp"
+                                    android:scaleType="fitCenter"
+                                    android:layout_weight="1"
+                                    android:onClick="showDatePicker" />
+                            </LinearLayout>
 
                         </RelativeLayout>
 
@@ -101,12 +121,33 @@
                                 android:text="@string/goal_end"
                                 android:id="@+id/endDateLabel" />
 
-                            <EditText
-                                android:layout_width="fill_parent"
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/endDateInput"
-                                android:inputType="date"
-                                android:layout_below="@+id/endDateLabel" />
+                                android:layout_below="@+id/endDateLabel" >
+
+                                <EditText
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/endDateInput"
+                                    android:inputType="date"
+                                    android:layout_below="@+id/endDateLabel"
+                                    android:layout_weight="1"
+                                    android:textSize="14dp" />
+
+                                <ImageButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="fill_parent"
+                                    android:id="@+id/endDateButton"
+                                    android:layout_toRightOf="@+id/editText2"
+                                    android:layout_below="@+id/startDateLabel"
+                                    android:background="@drawable/ic_today_white_48dp"
+                                    android:scaleType="fitCenter"
+                                    android:layout_weight="1"
+                                    android:onClick="showDatePicker" />
+                            </LinearLayout>
+
                         </RelativeLayout>
                     </LinearLayout>
                 </LinearLayout>
