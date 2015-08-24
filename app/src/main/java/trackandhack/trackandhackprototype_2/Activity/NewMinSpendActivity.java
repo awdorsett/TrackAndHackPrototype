@@ -19,6 +19,7 @@ import java.util.Locale;
 
 import trackandhack.trackandhackprototype_2.Classes.DBHelper;
 import trackandhack.trackandhackprototype_2.Classes.GiftCard;
+import trackandhack.trackandhackprototype_2.Classes.GoalType;
 import trackandhack.trackandhackprototype_2.Classes.MinSpend;
 import trackandhack.trackandhackprototype_2.Classes.MinSpendStatus;
 import trackandhack.trackandhackprototype_2.Classes.Status;
@@ -90,7 +91,7 @@ public class NewMinSpendActivity extends Activity implements DatePickerFragment.
         dbHelper.insertMinSpend(minSpend);
 
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("updated", "updated");
+        intent.putExtra("updated", GoalType.MIN_SPEND);
         setResult(RESULT_OK, intent);
         finish();
     }

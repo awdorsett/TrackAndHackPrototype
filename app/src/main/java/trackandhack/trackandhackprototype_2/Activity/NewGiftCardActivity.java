@@ -14,11 +14,13 @@ import android.database.*;
 
 import trackandhack.trackandhackprototype_2.Classes.DBHelper;
 import trackandhack.trackandhackprototype_2.Classes.GiftCard;
+import trackandhack.trackandhackprototype_2.Classes.GoalType;
 import trackandhack.trackandhackprototype_2.MainActivity;
 import trackandhack.trackandhackprototype_2.R;
 
 public class NewGiftCardActivity extends Activity {
     GiftCard giftCard;
+    DBHelper dbHelper;
     String DEFAULT_TITLE = "Gift Card - x";
 
     @Override
@@ -35,6 +37,8 @@ public class NewGiftCardActivity extends Activity {
         } else {
             giftCard = new GiftCard();
         }
+
+        dbHelper = DBHelper.getInstance(null);
 
         setupButtons();
     }
@@ -73,7 +77,7 @@ public class NewGiftCardActivity extends Activity {
                 // TODO throw error messages on screen about required fields
                 if (cardUpdated) {
                     Intent intent = new Intent(v.getContext(), MainActivity.class);
-                    intent.putExtra("giftCard", giftCard);
+                    intent.putExtra("updated", GoalType.GIFT_CARD);
                     setResult(RESULT_OK, intent);
                     finish();
                 }
@@ -107,6 +111,8 @@ public class NewGiftCardActivity extends Activity {
         giftCard.setInitialAmount(Double.parseDouble(amount.getText().toString()));
         giftCard.setCurrentAmount(Double.parseDouble(amount.getText().toString()));
         giftCard.setNotes(notes.getText().toString());
+
+        dbHelper.insertGiftCard(giftCard);
 
         return true;
     }

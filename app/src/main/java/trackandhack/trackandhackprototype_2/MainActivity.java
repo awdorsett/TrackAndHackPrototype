@@ -46,6 +46,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         SQLiteDatabase db = openOrCreateDatabase("card_db", MODE_PRIVATE, null);
+        Intent intent = getIntent();
 //        db.execSQL("DROP TABLE Goals");
 //        db.execSQL("DROP TABLE GiftCards");
 //        db.execSQL("DROP TABLE MinSpends");
@@ -70,6 +71,17 @@ public class MainActivity extends Activity {
             }
         });
         groupExpandableListView.setAdapter(groupListAdapter);
+
+        if (intent.hasExtra("expand")) {
+            GoalType goalType = (GoalType) intent.getSerializableExtra("expand");
+            for (int i = 0; i < groupListAdapter.getGroupCount(); i++) {
+                Group group = (Group) groupListAdapter.getGroup(i);
+                if (group.getGoalType().equals(goalType)) {
+                    groupExpandableListView.expandGroup(i);
+                    break;
+                }
+            }
+        }
     }
 
 
@@ -131,6 +143,7 @@ public class MainActivity extends Activity {
         if (resultCode == RESULT_OK) {
             if (data.hasExtra("updated")) {
                 Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("expand", data.getSerializableExtra("updated"));
                 startActivity(intent);
             }
         }
