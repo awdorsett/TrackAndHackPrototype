@@ -13,14 +13,19 @@ import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import trackandhack.trackandhackprototype_2.Classes.DBHelper;
 import trackandhack.trackandhackprototype_2.Classes.GiftCard;
 import trackandhack.trackandhackprototype_2.Classes.GiftCardStatus;
+import trackandhack.trackandhackprototype_2.Classes.GoalType;
 import trackandhack.trackandhackprototype_2.MainActivity;
 import trackandhack.trackandhackprototype_2.R;
 
+// TODO fix update card values to save to DB
 public class GiftCardActivity extends Activity {
     GiftCard giftCard;
     Button closeButton;
+    DBHelper dbHelper = DBHelper.getInstance(null);
+    boolean edited = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +35,7 @@ public class GiftCardActivity extends Activity {
 
         getActionBar().setDisplayShowTitleEnabled(false);
 
-        if (intent.hasExtra("giftCard")) {
-            giftCard = (GiftCard) intent.getSerializableExtra("giftCard");
-        }
+        giftCard = (GiftCard) intent.getSerializableExtra("giftCard");
 
         setupView();
     }
@@ -115,6 +118,7 @@ public class GiftCardActivity extends Activity {
                     currentAmount.setText(giftCard.getCurrentAmount().toString());
                     progressBar.setProgress(giftCard.getCurrentAmount().intValue());
                     adjustmentInput.setText(null);
+                    edited = true;
                 }
             }
         });
@@ -129,6 +133,7 @@ public class GiftCardActivity extends Activity {
                 int adjustmentDirection = -1;
                 giftCard.adjustCurrentAmount(adjustmentDirection * giftCard.getInitialAmount());
                 setGiftCardStatus(GiftCardStatus.CLOSED);
+                edited = true;
                 returnActivity();
             }
         });
@@ -137,7 +142,10 @@ public class GiftCardActivity extends Activity {
 
     private void returnActivity() {
         Intent intent = new Intent(GiftCardActivity.this, MainActivity.class);
-        intent.putExtra("giftCard", giftCard);
+        if (edited) {
+            intent.putExtra("updated", GoalType.GIFT_CARD);
+            dbHelper.updateGiftCard(giftCard);
+        }
         setResult(RESULT_OK, intent);
         finish();
     }

@@ -144,7 +144,9 @@ public class MainActivity extends Activity {
             if (data.hasExtra("updated")) {
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.putExtra("expand", data.getSerializableExtra("updated"));
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
             }
         }
     }

@@ -84,7 +84,7 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("id", gc.getUid());
         contentValues.put("digits", gc.getDigits());
         contentValues.put("fee", gc.getFee());
-        db.insert("GiftCards", null, contentValues);
+        db.insert(DBHelperModule.GC_TABLE, null, contentValues);
     }
 
     public void insertGoal(Goal goal) {
@@ -172,5 +172,46 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("id", ms.getUid());
         contentValues.put("bonus", ms.getBonus());
         db.insert("MinSpends", null, contentValues);
+    }
+
+    public boolean updateGiftCard(GiftCard gc) {
+        if (gc.getUid() == null || !updateGoal(gc)) {
+            return false;
+        }
+        ContentValues contentValues = giftCardContentValues(gc);
+        String idString = "id=" + gc.getUid();
+        return db.update(DBHelperModule.GC_TABLE, contentValues, idString, null) == 1;
+    }
+
+    public boolean updateGoal(Goal goal) {
+        if (goal.getUid() == null) {
+            return false;
+        }
+        ContentValues contentValues = goalContentValues(goal);
+        String idString = "id=" + goal.getUid();
+        return db.update(DBHelperModule.GOAL_TABLE, contentValues, idString, null) == 1;
+    }
+
+    private ContentValues goalContentValues(Goal goal) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("currentAmount", goal.getCurrentAmount());
+        if (goal.getEndDate() != null) {
+            contentValues.put("endDate",  iso8601Format.format(goal.getEndDate()));
+        }
+        contentValues.put("initialAmount", goal.getInitialAmount());
+        if (goal.getStartDate() != null) {
+            contentValues.put("startDate", iso8601Format.format(goal.getStartDate()));
+        }
+        contentValues.put("status", goal.getStatus().getName());
+        contentValues.put("title", goal.getTitle());
+        contentValues.put("notes", goal.getNotes());
+        return contentValues;
+    }
+
+    private ContentValues giftCardContentValues(GiftCard gc) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("digits", gc.getDigits());
+        contentValues.put("fee", gc.getFee());
+        return contentValues;
     }
 }
