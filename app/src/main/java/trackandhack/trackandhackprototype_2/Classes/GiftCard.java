@@ -55,11 +55,4 @@ public class GiftCard extends Goal {
     public void setDigits(String digits) {
         this.digits = digits;
     }
-
-    public Double adjustCurrentAmount(Double adjustment) {
-        currentAmount = Math.max(0.0, currentAmount + adjustment);
-        currentAmount = Math.min(initialAmount, currentAmount);
-
-        return currentAmount;
-    }
 }

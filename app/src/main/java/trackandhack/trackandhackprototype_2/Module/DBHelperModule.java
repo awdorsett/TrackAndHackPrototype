@@ -22,6 +22,12 @@ public class DBHelperModule {
             "digits TEXT," +
             "fee DOUBLE);";
     public static String GET_GC_QUERY = "SELECT Goals.id AS id, currentAmount, endDate, initialAmount, startDate, status, title, notes, digits, fee  FROM Goals INNER JOIN GiftCards ON Goals.id = GiftCards.id;";
+    public static String GET_GC_BY_ID_QUERY = "SELECT Goals.id AS id, currentAmount, endDate, " +
+            "initialAmount, startDate, status, title, notes, digits, fee " +
+            "FROM Goals INNER JOIN GiftCards ON Goals.id = GiftCards.id WHERE Goals.id = ?;";
+    public static String GET_MS_BY_ID_QUERY = "SELECT Goals.id AS id, currentAmount, endDate, " +
+            "initialAmount, startDate, status, title, notes, bonus FROM Goals " +
+            "INNER JOIN MinSpends ON Goals.id = MinSpends.id WHERE Goals.id = ?;";
     public static String GET_MS_QUERY = "SELECT Goals.id AS id, currentAmount, endDate, initialAmount, startDate, status, title, notes, bonus  FROM Goals INNER JOIN MinSpends ON Goals.id = MinSpends.id;";
 
     public static String CREATE_MS_QUERY = "CREATE TABLE IF NOT EXISTS MinSpends(" +

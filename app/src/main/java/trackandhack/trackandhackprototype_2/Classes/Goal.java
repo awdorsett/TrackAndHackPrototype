@@ -119,4 +119,11 @@ public abstract class Goal implements Serializable {
 
         return false;
     }
+
+    public Double adjustCurrentAmount(Double adjustment) {
+        currentAmount = Math.max(0.0, currentAmount + adjustment);
+        currentAmount = Math.min(initialAmount, currentAmount);
+
+        return currentAmount;
+    }
 }

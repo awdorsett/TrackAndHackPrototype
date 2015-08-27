@@ -192,6 +192,18 @@ public class DBHelper extends SQLiteOpenHelper {
         return db.update(DBHelperModule.GOAL_TABLE, contentValues, idString, null) == 1;
     }
 
+    public GiftCard getGiftCard(Long id) {
+        Cursor rs = db.rawQuery(DBHelperModule.GET_GC_BY_ID_QUERY, new String[]{id.toString()});
+
+        return rs.moveToFirst() ? getGiftCardEntry(rs) : null;
+    }
+
+    public MinSpend getMinSpend(Long id) {
+        Cursor rs = db.rawQuery(DBHelperModule.GET_MS_BY_ID_QUERY, new String[]{id.toString()});
+
+        return rs.moveToFirst() ? getMinSpendEntry(rs) : null;
+    }
+
     private ContentValues goalContentValues(Goal goal) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("currentAmount", goal.getCurrentAmount());
@@ -214,4 +226,6 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("fee", gc.getFee());
         return contentValues;
     }
+
+
 }

@@ -15,12 +15,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import trackandhack.trackandhackprototype_2.Activity.GiftCardActivity;
+import trackandhack.trackandhackprototype_2.Activity.MinSpendActivity;
 import trackandhack.trackandhackprototype_2.Activity.NewGiftCardActivity;
 import trackandhack.trackandhackprototype_2.Activity.NewMinSpendActivity;
 import trackandhack.trackandhackprototype_2.Classes.DBHelper;
@@ -30,7 +28,7 @@ import trackandhack.trackandhackprototype_2.Classes.Goal;
 import trackandhack.trackandhackprototype_2.Classes.GoalType;
 import trackandhack.trackandhackprototype_2.Classes.Group;
 import trackandhack.trackandhackprototype_2.Classes.GroupListAdapter;
-import trackandhack.trackandhackprototype_2.Classes.Status;
+import trackandhack.trackandhackprototype_2.Classes.MinSpend;
 import trackandhack.trackandhackprototype_2.Module.GroupModule;
 
 
@@ -63,9 +61,20 @@ public class MainActivity extends Activity {
         groupExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                GiftCard giftCard = (GiftCard) groupListAdapter.getChild(groupPosition, childPosition);
-                Intent intent = new Intent(MainActivity.this, GiftCardActivity.class);
-                intent.putExtra("giftCard", giftCard);
+                Group group = (Group) groupListAdapter.getGroup(groupPosition);
+                Intent intent = null;
+                Long goalId;
+                // TODO throw error when neither GoalType is found
+                if (group.getGoalType().equals(GoalType.GIFT_CARD)) {
+                    intent = new Intent(MainActivity.this, GiftCardActivity.class);
+                    GiftCard gc = (GiftCard) groupListAdapter.getChild(groupPosition, childPosition);
+                    intent.putExtra("id", gc.getUid());
+                } else if (group.getGoalType().equals(GoalType.MIN_SPEND)) {
+                    intent = new Intent(MainActivity.this, MinSpendActivity.class);
+                    MinSpend minSpend = (MinSpend) groupListAdapter.getChild(groupPosition, childPosition);
+                    intent.putExtra("id", minSpend.getUid());
+                }
+
                 startActivityForResult(intent, 1);
                 return false;
             }

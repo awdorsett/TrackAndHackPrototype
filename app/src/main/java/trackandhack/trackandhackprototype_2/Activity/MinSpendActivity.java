@@ -3,7 +3,6 @@ package trackandhack.trackandhackprototype_2.Activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,15 +13,15 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import trackandhack.trackandhackprototype_2.Classes.DBHelper;
-import trackandhack.trackandhackprototype_2.Classes.GiftCard;
-import trackandhack.trackandhackprototype_2.Classes.GiftCardStatus;
 import trackandhack.trackandhackprototype_2.Classes.GoalType;
+import trackandhack.trackandhackprototype_2.Classes.MinSpend;
+import trackandhack.trackandhackprototype_2.Classes.MinSpendStatus;
 import trackandhack.trackandhackprototype_2.MainActivity;
 import trackandhack.trackandhackprototype_2.R;
 
 // TODO fix update card values to save to DB
-public class GiftCardActivity extends Activity {
-    GiftCard giftCard;
+public class MinSpendActivity extends Activity {
+    MinSpend minSpend;
     Button closeButton;
     DBHelper dbHelper = DBHelper.getInstance(null);
     boolean edited = false;
@@ -30,13 +29,13 @@ public class GiftCardActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gift_card);
+        setContentView(R.layout.activity_min_spend);
         Intent intent = getIntent();
 
         getActionBar().setDisplayShowTitleEnabled(false);
 
         Long id = intent.getLongExtra("id", -1);
-        giftCard = dbHelper.getGiftCard(id);
+        minSpend = dbHelper.getMinSpend(id);
 
         setupView();
     }
@@ -45,7 +44,7 @@ public class GiftCardActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_gift_card, menu);
+        getMenuInflater().inflate(R.menu.menu_min_spend, menu);
         return true;
     }
 
@@ -67,19 +66,17 @@ public class GiftCardActivity extends Activity {
     private void setupView() {
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         TextView title = (TextView) findViewById(R.id.titleText);
-        TextView digits = (TextView) findViewById(R.id.digitsText);
         TextView currentAmount = (TextView) findViewById(R.id.currentAmountText);
         TextView initialAmount = (TextView) findViewById(R.id.initialAmountText);
         TextView notes = (TextView) findViewById(R.id.notesText);
 
-        title.setText(giftCard.getTitle());
-        digits.setText(giftCard.getDigits());
-        currentAmount.setText(Double.toString(giftCard.getCurrentAmount()));
-        initialAmount.setText(Double.toString(giftCard.getInitialAmount()));
-        notes.setText(giftCard.getNotes());
+        title.setText(minSpend.getTitle());
+        currentAmount.setText(Double.toString(minSpend.getCurrentAmount()));
+        initialAmount.setText(Double.toString(minSpend.getInitialAmount()));
+        notes.setText(minSpend.getNotes());
 
-        progressBar.setMax((int) Math.ceil(giftCard.getInitialAmount()));
-        progressBar.setProgress((int) Math.ceil(giftCard.getCurrentAmount()));
+        progressBar.setMax((int) Math.ceil(minSpend.getInitialAmount()));
+        progressBar.setProgress((int) Math.ceil(minSpend.getCurrentAmount()));
 
         setupButtons();
     }
@@ -110,21 +107,21 @@ public class GiftCardActivity extends Activity {
                     if (adjustmentSwitch.isChecked()) {
                         adjustmentDirection = -1;
                     }
-                    Double amountAfterAdjustment = giftCard.adjustCurrentAmount(adjustmentDirection * adjustment);
-                    if (amountAfterAdjustment == 0) {
-                        setGiftCardStatus(GiftCardStatus.CLOSED);
-                    } else if (giftCard.getStatus().equals(GiftCardStatus.CLOSED)) {
-                        setGiftCardStatus(GiftCardStatus.OPEN);
+                    Double amountAfterAdjustment = minSpend.adjustCurrentAmount(adjustmentDirection * adjustment);
+                    if (amountAfterAdjustment == minSpend.getInitialAmount()) {
+                        setStatus(MinSpendStatus.CLOSED);
+                    } else if (minSpend.getStatus().equals(MinSpendStatus.CLOSED)) {
+                        setStatus(MinSpendStatus.OPEN);
                     }
-                    currentAmount.setText(giftCard.getCurrentAmount().toString());
-                    progressBar.setProgress(giftCard.getCurrentAmount().intValue());
+                    currentAmount.setText(minSpend.getCurrentAmount().toString());
+                    progressBar.setProgress(minSpend.getCurrentAmount().intValue());
                     adjustmentInput.setText(null);
                     edited = true;
                 }
             }
         });
 
-        if (giftCard.getStatus().equals(GiftCardStatus.CLOSED)) {
+        if (minSpend.getStatus().equals(MinSpendStatus.CLOSED)) {
             closeButton.setEnabled(false);
         }
 
@@ -132,8 +129,8 @@ public class GiftCardActivity extends Activity {
             @Override
             public void onClick(View v) {
                 int adjustmentDirection = -1;
-                giftCard.adjustCurrentAmount(adjustmentDirection * giftCard.getInitialAmount());
-                setGiftCardStatus(GiftCardStatus.CLOSED);
+                minSpend.adjustCurrentAmount(adjustmentDirection * minSpend.getInitialAmount());
+                setStatus(MinSpendStatus.CLOSED);
                 edited = true;
                 returnActivity();
             }
@@ -142,22 +139,22 @@ public class GiftCardActivity extends Activity {
     }
 
     private void returnActivity() {
-        Intent intent = new Intent(GiftCardActivity.this, MainActivity.class);
+        Intent intent = new Intent(MinSpendActivity.this, MainActivity.class);
         if (edited) {
-            intent.putExtra("updated", GoalType.GIFT_CARD);
-            dbHelper.updateGiftCard(giftCard);
+            intent.putExtra("updated", GoalType.MIN_SPEND);
+            dbHelper.updateGoal(minSpend);
         }
         setResult(RESULT_OK, intent);
         finish();
     }
 
-    private void setGiftCardStatus(GiftCardStatus status) {
-        if (status.equals(GiftCardStatus.OPEN)) {
+    private void setStatus(MinSpendStatus status) {
+        if (status.equals(MinSpendStatus.OPEN)) {
             closeButton.setEnabled(true);
-            giftCard.setStatus(status);
-        } else if (status.equals(GiftCardStatus.CLOSED)) {
+            minSpend.setStatus(status);
+        } else if (status.equals(MinSpendStatus.CLOSED)) {
             closeButton.setEnabled(false);
-            giftCard.setStatus(status);
+            minSpend.setStatus(status);
         }
     }
 }
