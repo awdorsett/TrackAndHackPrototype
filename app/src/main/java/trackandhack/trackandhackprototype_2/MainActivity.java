@@ -63,7 +63,6 @@ public class MainActivity extends Activity {
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 Group group = (Group) groupListAdapter.getGroup(groupPosition);
                 Intent intent = null;
-                Long goalId;
                 // TODO throw error when neither GoalType is found
                 if (group.getGoalType().equals(GoalType.GIFT_CARD)) {
                     intent = new Intent(MainActivity.this, GiftCardActivity.class);
