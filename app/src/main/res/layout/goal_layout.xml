@@ -41,16 +41,26 @@
                 android:textSize="24dp" />
         </RelativeLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
             <ProgressBar
                 style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:id="@+id/goalProgressBar"
+                android:layout_weight="8" />
+
+            <ToggleButton
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/goalProgressBar" />
-        </RelativeLayout>
+                android:id="@+id/closeToggle"
+                android:checked="false"
+                android:layout_toRightOf="@+id/goalProgressBar"
+                android:layout_weight="1" />
+        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"

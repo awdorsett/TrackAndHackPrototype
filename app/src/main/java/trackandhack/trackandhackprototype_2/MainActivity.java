@@ -152,17 +152,6 @@ public class MainActivity extends Activity {
         }
     }
 
-    private Group getGroupByType(String id) {
-        GroupModule.GroupType type = GroupModule.GroupType.valueOf(id);
-        for (int i = 0; i < groupList.size(); i++) {
-            if (groupList.get(i).getType().equals(type)) {
-                return groupList.get(i);
-            }
-        }
-
-        return null;
-    }
-
     private void getEntriesForGroups() {
         for(Group group : groupList) {
             group.setGoalList(dbHelper.getEntries(group.getGoalType()));
