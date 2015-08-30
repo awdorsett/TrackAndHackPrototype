@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -17,12 +16,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import trackandhack.trackandhackprototype_2.Classes.DBHelper;
-import trackandhack.trackandhackprototype_2.Classes.GiftCard;
+import trackandhack.trackandhackprototype_2.DBHelper;
 import trackandhack.trackandhackprototype_2.Classes.GoalType;
 import trackandhack.trackandhackprototype_2.Classes.MinSpend;
 import trackandhack.trackandhackprototype_2.Classes.MinSpendStatus;
-import trackandhack.trackandhackprototype_2.Classes.Status;
 import trackandhack.trackandhackprototype_2.Fragments.DatePickerFragment;
 import trackandhack.trackandhackprototype_2.MainActivity;
 import trackandhack.trackandhackprototype_2.R;

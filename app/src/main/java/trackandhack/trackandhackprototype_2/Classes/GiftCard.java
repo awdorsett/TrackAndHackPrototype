@@ -18,8 +18,8 @@ public class GiftCard extends Goal {
                 original.getInitialAmount(),
                 original.getStartDate(),
                 GiftCardStatus.OPEN,
-                null,
-                null
+                original.getTitle(),
+                original.getNotes()
         );
 
     }
@@ -50,6 +50,11 @@ public class GiftCard extends Goal {
 
     public String getDigits() {
         return digits;
+    }
+
+    @Override
+    public String getDisplayTitle() {
+        return title + " - x" + digits;
     }
 
     public void setDigits(String digits) {

@@ -12,7 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import trackandhack.trackandhackprototype_2.Classes.DBHelper;
+import trackandhack.trackandhackprototype_2.DBHelper;
 import trackandhack.trackandhackprototype_2.Classes.GoalType;
 import trackandhack.trackandhackprototype_2.Classes.MinSpend;
 import trackandhack.trackandhackprototype_2.Classes.MinSpendStatus;

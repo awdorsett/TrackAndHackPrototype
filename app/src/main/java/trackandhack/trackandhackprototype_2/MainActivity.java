@@ -4,15 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ExpandableListView;
 
 import java.util.List;
@@ -21,10 +17,8 @@ import trackandhack.trackandhackprototype_2.Activity.GiftCardActivity;
 import trackandhack.trackandhackprototype_2.Activity.MinSpendActivity;
 import trackandhack.trackandhackprototype_2.Activity.NewGiftCardActivity;
 import trackandhack.trackandhackprototype_2.Activity.NewMinSpendActivity;
-import trackandhack.trackandhackprototype_2.Classes.DBHelper;
 import trackandhack.trackandhackprototype_2.Classes.GiftCard;
 import trackandhack.trackandhackprototype_2.Classes.GiftCardStatus;
-import trackandhack.trackandhackprototype_2.Classes.Goal;
 import trackandhack.trackandhackprototype_2.Classes.GoalType;
 import trackandhack.trackandhackprototype_2.Classes.Group;
 import trackandhack.trackandhackprototype_2.Classes.GroupListAdapter;
@@ -36,7 +30,6 @@ public class MainActivity extends Activity {
     List<Group> groupList;
     ExpandableListView groupExpandableListView;
     GroupListAdapter groupListAdapter;
-    DrawerLayout navDrawer;
     DBHelper dbHelper =  DBHelper.getInstance(this);
 
     @Override

@@ -89,7 +89,7 @@ public class GroupListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parentView) {
-        String goalTitle = ((Goal) getChild(groupPosition, childPosition)).getTitle();
+        String goalTitle = ((Goal) getChild(groupPosition, childPosition)).getDisplayTitle();
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.goal_layout, parentView, false);

@@ -71,6 +71,10 @@ public abstract class Goal implements Serializable {
         return title;
     }
 
+    public String getDisplayTitle() {
+        return title;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }

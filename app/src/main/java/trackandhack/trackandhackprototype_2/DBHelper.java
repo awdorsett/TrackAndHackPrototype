@@ -1,4 +1,4 @@
-package trackandhack.trackandhackprototype_2.Classes;
+package trackandhack.trackandhackprototype_2;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,13 +7,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import trackandhack.trackandhackprototype_2.Classes.GiftCard;
+import trackandhack.trackandhackprototype_2.Classes.GiftCardStatus;
+import trackandhack.trackandhackprototype_2.Classes.Goal;
+import trackandhack.trackandhackprototype_2.Classes.GoalType;
+import trackandhack.trackandhackprototype_2.Classes.MinSpend;
+import trackandhack.trackandhackprototype_2.Classes.MinSpendStatus;
 import trackandhack.trackandhackprototype_2.Module.DBHelperModule;
 
 
@@ -23,8 +26,7 @@ import trackandhack.trackandhackprototype_2.Module.DBHelperModule;
 public class DBHelper extends SQLiteOpenHelper {
     private static DBHelper instance = null;
     SQLiteDatabase db;
-    SimpleDateFormat iso8601Format = new SimpleDateFormat(
-            "yyyy-MM-dd HH:mm:ss");
+    SimpleDateFormat iso8601Format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     private DBHelper(Context context){
         super(context, "card_db", null, 1);
@@ -52,29 +54,37 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(DBHelperModule.CREATE_MS_QUERY);
     }
 
-    public List<?> getEntries(GoalType type) {
+    public List<?> getEntries(GoalType type, Boolean includeClosed) {
         ArrayList<Goal> entries = new ArrayList<>();
+        Cursor resultSet;
         if (type.equals(GoalType.GIFT_CARD)) {
-            Cursor resultSet = db.rawQuery(DBHelperModule.GET_GC_QUERY, null);
+            resultSet = db.rawQuery(DBHelperModule.GET_GC_QUERY, null);
 
             while (resultSet.moveToNext()) {
                 GiftCard gc = getGiftCardEntry(resultSet);
                 if (gc != null) {
-                    entries.add(gc);
+                    if (includeClosed || !gc.getStatus().equals(GiftCardStatus.CLOSED)) {
+                        entries.add(gc);
+                    }
                 }
             }
         } else if (type.equals(GoalType.MIN_SPEND)) {
-            Cursor resultSet = db.rawQuery(DBHelperModule.GET_MS_QUERY, null);
+            resultSet = db.rawQuery(DBHelperModule.GET_MS_QUERY, null);
 
             while (resultSet.moveToNext()) {
                 MinSpend gc = getMinSpendEntry(resultSet);
                 if (gc != null) {
-                    entries.add(gc);
+                    if (includeClosed || !gc.getStatus().equals(MinSpendStatus.CLOSED)) {
+                        entries.add(gc);
+                    }
                 }
             }
         }
 
         return entries;
+    }
+    public List<?> getEntries(GoalType type) {
+        return getEntries(type, false);
     }
 
     public void insertGiftCard(GiftCard gc) {

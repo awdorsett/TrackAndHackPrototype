@@ -3,7 +3,6 @@ package trackandhack.trackandhackprototype_2.Activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,7 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import trackandhack.trackandhackprototype_2.Classes.DBHelper;
+import trackandhack.trackandhackprototype_2.DBHelper;
 import trackandhack.trackandhackprototype_2.Classes.GiftCard;
 import trackandhack.trackandhackprototype_2.Classes.GiftCardStatus;
 import trackandhack.trackandhackprototype_2.Classes.GoalType;

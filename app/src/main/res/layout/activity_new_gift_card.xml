@@ -71,7 +71,6 @@
             android:layout_above="@+id/amountInput"
             android:layout_alignLeft="@+id/amountInput"
             android:layout_alignParentStart="false"
-            android:inputType="textCapSentences"
             android:gravity="center_horizontal" />
 
 
@@ -190,6 +189,14 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_alignParentBottom="false" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkBox_dup_note"
+            android:checked="true"
+            android:layout_marginLeft="20dp"
+            android:layout_alignTop="@+id/notesInput" />
 
     </RelativeLayout>
 

@@ -2,18 +2,16 @@ package trackandhack.trackandhackprototype_2.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
-import android.database.*;
 
-import trackandhack.trackandhackprototype_2.Classes.DBHelper;
+import trackandhack.trackandhackprototype_2.DBHelper;
 import trackandhack.trackandhackprototype_2.Classes.GiftCard;
 import trackandhack.trackandhackprototype_2.Classes.GoalType;
 import trackandhack.trackandhackprototype_2.MainActivity;
@@ -22,13 +20,23 @@ import trackandhack.trackandhackprototype_2.R;
 public class NewGiftCardActivity extends Activity {
     GiftCard giftCard;
     DBHelper dbHelper;
+    EditText digits;
+    EditText fee;
+    EditText amount;
+    EditText title;
+    EditText notes;
+    boolean sourceClonedCard = false;
     String DEFAULT_TITLE = "Gift Card - x";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_gift_card);
-        EditText digits = (EditText) findViewById(R.id.digitsInput);
+        digits = (EditText) findViewById(R.id.digitsInput);
+        fee = (EditText) findViewById(R.id.feeInput);
+        amount = (EditText) findViewById(R.id.amountInput);
+        title = (EditText) findViewById(R.id.titleInput);
+        notes = (EditText) findViewById(R.id.notesInput);
         digits.requestFocus();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         getActionBar().setTitle("Add New Gift Card");
@@ -36,7 +44,9 @@ public class NewGiftCardActivity extends Activity {
         Intent intent = getIntent();
 
         if(intent.hasExtra("clone")) {
+            sourceClonedCard = true;
             giftCard = GiftCard.clone((GiftCard) intent.getSerializableExtra("clone"));
+            setupClonedDetails();
         } else {
             giftCard = new GiftCard();
         }
@@ -72,6 +82,7 @@ public class NewGiftCardActivity extends Activity {
     private void setupButtons() {
         Button doneButton = (Button) findViewById(R.id.doneButton);
         Button cancelButton = (Button) findViewById(R.id.cancelButton);
+        Button cloneButton = (Button) findViewById(R.id.cloneButton);
 
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,21 +101,34 @@ public class NewGiftCardActivity extends Activity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (sourceClonedCard) {
+                    Intent intent = new Intent(v.getContext(), MainActivity.class);
+                    intent.putExtra("updated", GoalType.GIFT_CARD);
+                    setResult(RESULT_OK, intent);
+                }
                 finish();
+            }
+        });
+
+        cloneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), NewGiftCardActivity.class);
+                // TODO throw error if update doesn't work
+                if (updateCardInfo()) {
+                    intent.putExtra("clone", cloneGiftCard());
+                    startActivity(intent);
+                    finish();
+                }
+
             }
         });
     }
 
     // TODO validate inputs
     private boolean updateCardInfo() {
-        EditText digits = (EditText) findViewById(R.id.digitsInput);
-        EditText fee = (EditText) findViewById(R.id.feeInput);
-        EditText amount = (EditText) findViewById(R.id.amountInput);
-        EditText title = (EditText) findViewById(R.id.titleInput);
-        EditText notes = (EditText) findViewById(R.id.notesInput);
-
         if (title.getText().toString().equals("")) {
-            giftCard.setTitle(DEFAULT_TITLE + digits.getText().toString());
+            giftCard.setTitle(DEFAULT_TITLE);
         } else {
             giftCard.setTitle(title.getText().toString());
         }
@@ -118,5 +142,36 @@ public class NewGiftCardActivity extends Activity {
         dbHelper.insertGiftCard(giftCard);
 
         return true;
+    }
+
+    private GiftCard cloneGiftCard() {
+        GiftCard clonedCard = GiftCard.clone(giftCard);
+        CheckBox amount = (CheckBox) findViewById(R.id.checkBox_dup_amount);
+        CheckBox fee = (CheckBox) findViewById(R.id.checkBox_dup_fee);
+        CheckBox title = (CheckBox) findViewById(R.id.checkBox_dup_title);
+        CheckBox notes = (CheckBox) findViewById(R.id.checkBox_dup_note);
+
+        if(!amount.isChecked()) {
+            clonedCard.setInitialAmount(null);
+        }
+        if(!fee.isChecked()) {
+            clonedCard.setFee(null);
+        }
+        if(!title.isChecked()) {
+            clonedCard.setTitle(null);
+        }
+        if(!notes.isChecked()) {
+            clonedCard.setNotes(null);
+        }
+
+        return clonedCard;
+    }
+
+    private void setupClonedDetails() {
+        digits.setText(giftCard.getDigits());
+        fee.setText(giftCard.getFee().toString());
+        amount.setText(giftCard.getInitialAmount().toString());
+        title.setText(giftCard.getTitle());
+        notes.setText(giftCard.getNotes());
     }
 }
