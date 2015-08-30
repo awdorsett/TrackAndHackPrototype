@@ -22,8 +22,9 @@ import trackandhack.trackandhackprototype_2.R;
 // TODO fix update card values to save to DB
 public class GiftCardActivity extends Activity {
     GiftCard giftCard;
-    Button closeButton;
+    Button closeButton, editButton;
     DBHelper dbHelper = DBHelper.getInstance(null);
+    Long giftCardId;
     boolean edited = false;
 
     @Override
@@ -34,8 +35,7 @@ public class GiftCardActivity extends Activity {
 
         getActionBar().setDisplayShowTitleEnabled(false);
 
-        Long id = intent.getLongExtra("id", -1);
-        giftCard = dbHelper.getGiftCard(id);
+        giftCardId = intent.getLongExtra("id", -1);
 
         setupView();
     }
@@ -63,7 +63,20 @@ public class GiftCardActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (data.hasExtra("updated")) {
+                setupView();
+                edited = true;
+            }
+        }
+    }
+
     private void setupView() {
+        giftCard = dbHelper.getGiftCard(giftCardId);
+
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         TextView title = (TextView) findViewById(R.id.titleText);
         TextView digits = (TextView) findViewById(R.id.digitsText);
@@ -84,6 +97,7 @@ public class GiftCardActivity extends Activity {
     }
 
     private void setupButtons() {
+        editButton = (Button) findViewById(R.id.editButton);
         Button doneButton = (Button) findViewById(R.id.doneButton);
         final Button adjustmentButton = (Button) findViewById(R.id.adjustmentButton);
         closeButton = (Button) findViewById(R.id.closeButton);
@@ -135,6 +149,16 @@ public class GiftCardActivity extends Activity {
                 setGiftCardStatus(GiftCardStatus.CLOSED);
                 edited = true;
                 returnActivity();
+            }
+        });
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GiftCardActivity.this, NewGiftCardActivity.class);
+                intent.putExtra("mode", NewGiftCardActivity.EDIT_MODE);
+                intent.putExtra("id", giftCard.getUid());
+                startActivityForResult(intent, 1);
             }
         });
 

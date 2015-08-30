@@ -12,20 +12,57 @@
         android:layout_weight="5"
         android:scaleType="fitCenter" />
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:layout_marginLeft="24dp">
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/goalListElement"
-            android:layout_width="fill_parent"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:layout_centerInParent="true"
-            android:textSize="24dp" />
-    </RelativeLayout>
+            android:layout_marginLeft="24dp">
+
+            <TextView
+                android:id="@+id/goalListElement"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:layout_centerInParent="true"
+                android:textSize="24dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="curr"
+                android:id="@+id/currentText"
+                android:layout_toLeftOf="@+id/dividerText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="/"
+                android:id="@+id/dividerText"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="init"
+                android:id="@+id/initialText"
+                android:layout_toRightOf="@+id/dividerText" />
+        </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

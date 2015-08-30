@@ -25,26 +25,43 @@ import trackandhack.trackandhackprototype_2.MainActivity;
 import trackandhack.trackandhackprototype_2.R;
 
 public class NewGiftCardActivity extends Activity {
+    public static String EDIT_MODE = "edit";
     GiftCard giftCard;
     DBHelper dbHelper;
     EditText digits, fee, amount, title, notes;
     Button doneButton, cloneButton;
-    Boolean updated = false;
+    Boolean updated = false, editMode = false;
     String DEFAULT_TITLE = "Gift Card - x";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dbHelper = DBHelper.getInstance(null);
         setContentView(R.layout.activity_new_gift_card);
+        getActionBar().setTitle("Add New Gift Card");
         setupElements();
         setupFocus();
+
         digits.requestFocus();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        getActionBar().setTitle("Add New Gift Card");
 
-        giftCard = new GiftCard();
+        Intent intent = getIntent();
+        if (intent.hasExtra("mode")) {
+            if (intent.getStringExtra("mode").equals(EDIT_MODE)) {
+                cloneButton.setVisibility(View.INVISIBLE);
+                Long id = intent.getLongExtra("id", -1);
+                if (id != -1) {
+                    editMode = true;
+                    giftCard = dbHelper.getGiftCard(id);
+                    setupEditMode();
+                } else {
+                    giftCard = new GiftCard();
+                }
+            }
+        } else {
+            giftCard = new GiftCard();
+        }
 
-        dbHelper = DBHelper.getInstance(null);
 
         setupButtons();
     }
@@ -80,7 +97,7 @@ public class NewGiftCardActivity extends Activity {
             public void onClick(View v) {
                 boolean cardUpdated = updateCardInfo();
                 // TODO throw error messages on screen about required fields
-                if (cardUpdated) {
+                if (cardUpdated || updated) {
                     setUpdateIntent();
                 }
                 finish();
@@ -130,10 +147,14 @@ public class NewGiftCardActivity extends Activity {
         giftCard.setDigits(digits.getText().toString());
         giftCard.setFee(Double.parseDouble(fee.getText().toString()));
         giftCard.setInitialAmount(Double.parseDouble(amount.getText().toString()));
-        giftCard.setCurrentAmount(Double.parseDouble(amount.getText().toString()));
         giftCard.setNotes(notes.getText().toString());
 
-        dbHelper.insertGiftCard(giftCard);
+        if (editMode) {
+            dbHelper.updateGiftCard(giftCard);
+        } else {
+            giftCard.setCurrentAmount(Double.parseDouble(amount.getText().toString()));
+            dbHelper.insertGiftCard(giftCard);
+        }
 
         return true;
     }
@@ -201,5 +222,23 @@ public class NewGiftCardActivity extends Activity {
         notes = (EditText) findViewById(R.id.notesInput);
         cloneButton = (Button) findViewById(R.id.cloneButton);
         doneButton = (Button) findViewById(R.id.doneButton);
+    }
+
+    private void setupEditMode() {
+        digits.setText(giftCard.getDigits());
+        title.setText(giftCard.getTitle());
+        notes.setText(giftCard.getNotes());
+
+        if (giftCard.getInitialAmount() != null) {
+            amount.setText(giftCard.getInitialAmount().toString());
+        }
+
+        if (giftCard.getFee() != null) {
+            fee.setText(giftCard.getFee().toString());
+        }
+
+        if (giftCard.getDigits() != null) {
+            digits.setText(giftCard.getDigits().toString());
+        }
     }
 }
