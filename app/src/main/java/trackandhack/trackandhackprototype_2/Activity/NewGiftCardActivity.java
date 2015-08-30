@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import trackandhack.trackandhackprototype_2.DBHelper;
 import trackandhack.trackandhackprototype_2.Classes.GiftCard;
@@ -100,8 +102,17 @@ public class NewGiftCardActivity extends Activity {
             public void onClick(View v) {
                 // TODO throw error if update doesn't work
                 if (updateCardInfo()) {
+
+                    Context context = getApplicationContext();
+                    CharSequence text = giftCard.getDisplayTitle() + " was created";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+
                     setupViewForClone();
                     updated = true;
+
                 }
 
             }
