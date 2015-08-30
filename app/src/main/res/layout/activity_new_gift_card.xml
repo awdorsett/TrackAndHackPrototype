@@ -31,8 +31,7 @@
             android:layout_alignParentRight="true"
             android:numeric="decimal"
             android:maxLength="4"
-            android:layout_above="@+id/feeLabel"
-            android:nextFocusDown="@+id/amountInput"/>
+            android:layout_above="@+id/feeLabel"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -58,8 +57,7 @@
             android:layout_alignParentStart="false"
             android:layout_alignParentLeft="false"
             android:layout_toRightOf="@+id/checkBox_dup_amount"
-            android:numeric="decimal"
-            android:nextFocusDown="@+id/feeInput"/>
+            android:numeric="decimal" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -91,8 +89,7 @@
             android:id="@+id/feeLabel"
             android:layout_alignRight="@id/feeInput"
             android:layout_above="@+id/feeInput"
-            android:gravity="center_horizontal"
-            android:nextFocusDown="@+id/titleInput"/>
+            android:gravity="center_horizontal" />
 
 
         <CheckBox
@@ -129,8 +126,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:textColor="#ffffff"
-            android:singleLine="true"
-            android:nextFocusDown="@+id/notesInput"/>
+            android:singleLine="true" />
 
         <CheckBox
             android:layout_width="wrap_content"
@@ -176,8 +172,7 @@
             android:layout_centerInParent="true"
             android:nestedScrollingEnabled="true"
             android:textColor="#ffffff"
-            android:gravity="top"
-            android:nextFocusDown="@id/doneButton"/>
+            android:gravity="top"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -222,7 +217,7 @@
             android:id="@+id/cloneButton"
             android:layout_weight="1"
             android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp" />
+            android:layout_marginRight="15dp"/>
 
         <Button
             android:layout_width="wrap_content"
