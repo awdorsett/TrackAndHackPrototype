@@ -2,15 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <ImageView
-        android:id="@+id/goalListIcon"
-        android:layout_width="fill_parent"
-        android:adjustViewBounds="true"
-        android:maxHeight="42dp"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_flight_takeoff_white_48dp"
-        android:layout_weight="5"
-        android:scaleType="fitCenter" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="5">
+
+        <ImageView
+            android:id="@+id/goalListIcon"
+            android:layout_width="fill_parent"
+            android:adjustViewBounds="true"
+            android:maxHeight="42dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_flight_takeoff_white_48dp"
+            android:layout_weight="5"
+            android:scaleType="fitCenter"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
 
     <LinearLayout
         android:orientation="vertical"
@@ -31,6 +39,17 @@
                 android:textAlignment="center"
                 android:layout_centerInParent="true"
                 android:textSize="24dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/goalProgressBar" />
         </RelativeLayout>
 
         <RelativeLayout

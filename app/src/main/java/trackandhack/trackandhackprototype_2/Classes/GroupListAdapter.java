@@ -12,7 +12,10 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.List;
@@ -89,7 +92,7 @@ public class GroupListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parentView) {
-        String goalTitle = ((Goal) getChild(groupPosition, childPosition)).getDisplayTitle();
+        Goal goal = ((Goal) getChild(groupPosition, childPosition));
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.goal_layout, parentView, false);
@@ -97,8 +100,15 @@ public class GroupListAdapter extends BaseExpandableListAdapter {
 
         TextView childView = (TextView) convertView.findViewById(R.id.goalListElement);
         ImageView icon = (ImageView) convertView.findViewById(R.id.goalListIcon);
+        TextView currentAmount = (TextView) convertView.findViewById(R.id.currentText);
+        TextView initialAmount = (TextView) convertView.findViewById(R.id.initialText);
+        ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.goalProgressBar);
+        progressBar.setMax(goal.getInitialAmount().intValue());
+        progressBar.setProgress(goal.getCurrentAmount().intValue());
+        currentAmount.setText(goal.getCurrentAmount().toString());
+        initialAmount.setText(goal.getInitialAmount().toString());
         icon.setImageResource(R.drawable.ic_card_giftcard_white_24dp);
-        childView.setText(goalTitle);
+        childView.setText(goal.getDisplayTitle());
 
         return convertView;
     }
