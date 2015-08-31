@@ -71,18 +71,29 @@ public class NewMinSpendActivity extends Activity implements DatePickerFragment.
     public void showDatePicker(View v) {
         FragmentManager fragMgr = getFragmentManager();
         Calendar calendar = null;
-        if (v.getId() != R.id.startDateButton && startDate != null) {
+        if (v.getId() == R.id.endDateButton ) {
+            DateFormat format = new SimpleDateFormat("MM-dd-yy", Locale.ENGLISH);
+
+            try {
+                calendar = Calendar.getInstance();
+                if (endDate.getText().toString().equals("")) {
+                    calendar.setTime(format.parse(startDate.getText().toString()));
+                    calendar.add(Calendar.MONTH, 3);
+                } else {
+                    calendar.setTime(format.parse(endDate.getText().toString()));
+                }
+            } catch (Exception e) {}
+        } else if (v.getId() == R.id.startDateButton && !startDate.getText().toString().equals("")) {
             DateFormat format = new SimpleDateFormat("MM-dd-yy", Locale.ENGLISH);
             try {
                 calendar = Calendar.getInstance();
                 calendar.setTime(format.parse(startDate.getText().toString()));
-                calendar.add(Calendar.MONTH, 3);
             } catch (Exception e) {}
         }
         DatePickerFragment datePickerFragment = DatePickerFragment.newInstance(v.getId(), calendar);
         datePickerFragment.show(fragMgr, "datePicker");
     }
-
+    // TODO handle date errors
     public void submitMinSpend(View v) {
         Double curr = Double.parseDouble(currentAmount.getText().toString());
         Double initial = Double.parseDouble(initialAmount.getText().toString());
