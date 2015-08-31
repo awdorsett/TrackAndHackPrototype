@@ -31,14 +31,14 @@ public class NewGiftCardActivity extends Activity {
     EditText digits, fee, amount, title, notes;
     Button doneButton, cloneButton;
     Boolean updated = false, editMode = false;
-    String DEFAULT_TITLE = "Gift Card - x";
+    String DEFAULT_TITLE = "Gift Card";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dbHelper = DBHelper.getInstance(null);
         setContentView(R.layout.activity_new_gift_card);
-        getActionBar().setTitle("Add New Gift Card");
+        getActionBar().setTitle(R.string.title_activity_new_gift_card);
         setupElements();
         setupFocus();
 
@@ -48,6 +48,7 @@ public class NewGiftCardActivity extends Activity {
         Intent intent = getIntent();
         if (intent.hasExtra("mode")) {
             if (intent.getStringExtra("mode").equals(EDIT_MODE)) {
+                getActionBar().setTitle(R.string.title_activity_edit_gift_card);
                 cloneButton.setVisibility(View.INVISIBLE);
                 Long id = intent.getLongExtra("id", -1);
                 if (id != -1) {

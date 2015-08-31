@@ -1,11 +1,13 @@
 package trackandhack.trackandhackprototype_2.Activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -26,17 +28,17 @@ public class GiftCardActivity extends Activity {
     DBHelper dbHelper = DBHelper.getInstance(null);
     Long giftCardId;
     boolean edited = false;
+    InputMethodManager inputManager;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gift_card);
         Intent intent = getIntent();
 
-        getActionBar().setDisplayShowTitleEnabled(false);
+        getActionBar().setTitle(R.string.title_activity_gift_card);
 
         giftCardId = intent.getLongExtra("id", -1);
-
+        inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         setupView();
     }
 
@@ -120,6 +122,7 @@ public class GiftCardActivity extends Activity {
                 String adjustmentString = adjustmentInput.getText().toString();
                 if (!adjustmentString.equals("")) {
                     Double adjustment = Double.parseDouble(adjustmentString);
+
                     if (adjustmentSwitch.isChecked()) {
                         adjustmentDirection = -1;
                     }
@@ -132,7 +135,11 @@ public class GiftCardActivity extends Activity {
                     currentAmount.setText(giftCard.getCurrentAmount().toString());
                     progressBar.setProgress(giftCard.getCurrentAmount().intValue());
                     adjustmentInput.setText(null);
+                    v.clearFocus();
                     edited = true;
+
+                    inputManager.hideSoftInputFromWindow(v.getWindowToken(),
+                            InputMethodManager.HIDE_NOT_ALWAYS);
                 }
             }
         });

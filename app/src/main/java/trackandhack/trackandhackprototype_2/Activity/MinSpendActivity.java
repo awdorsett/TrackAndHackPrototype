@@ -33,7 +33,7 @@ public class MinSpendActivity extends Activity {
         setContentView(R.layout.activity_min_spend);
         Intent intent = getIntent();
 
-        getActionBar().setDisplayShowTitleEnabled(false);
+        getActionBar().setTitle(R.string.title_activity_min_spend);
 
         id = intent.getLongExtra("id", -1);
         minSpend = dbHelper.getMinSpend(id);

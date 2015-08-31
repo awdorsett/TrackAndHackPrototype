@@ -37,7 +37,7 @@ public class NewMinSpendActivity extends Activity implements DatePickerFragment.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_min_spend);
-        getActionBar().setTitle("Add New Min Spend");
+        getActionBar().setTitle(R.string.title_activity_new_mind_spend);
         dbHelper = DBHelper.getInstance(null);
 
         title = (EditText) findViewById(R.id.titleInput);
@@ -51,6 +51,7 @@ public class NewMinSpendActivity extends Activity implements DatePickerFragment.
 
         Intent intent = getIntent();
         if (intent.hasExtra("mode") && intent.getStringExtra("mode").equals(EDIT_MODE)) {
+            getActionBar().setTitle(R.string.title_activity_edit_mind_spend);
             editMode = true;
             Long id = intent.getLongExtra("id", -1);
             minSpend = dbHelper.getMinSpend(id);
