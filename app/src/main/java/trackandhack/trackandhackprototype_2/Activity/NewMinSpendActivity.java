@@ -25,14 +25,19 @@ import trackandhack.trackandhackprototype_2.MainActivity;
 import trackandhack.trackandhackprototype_2.R;
 
 public class NewMinSpendActivity extends Activity implements DatePickerFragment.Communicator{
+    final static String EDIT_MODE = "edit";
     EditText title, startDate, endDate, initialAmount, currentAmount, notes;
+    DateFormat format = new SimpleDateFormat("MM-dd-yy", Locale.ENGLISH);
     Button doneButton;
     DBHelper dbHelper;
+    Boolean editMode = false;
+    MinSpend minSpend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_min_spend);
+        getActionBar().setTitle("Add New Min Spend");
         dbHelper = DBHelper.getInstance(null);
 
         title = (EditText) findViewById(R.id.titleInput);
@@ -43,7 +48,13 @@ public class NewMinSpendActivity extends Activity implements DatePickerFragment.
         notes = (EditText) findViewById(R.id.notesInput);
         doneButton = (Button) findViewById(R.id.doneButton);
 
-        getActionBar().setTitle("Add New Min Spend");
+        Intent intent = getIntent();
+        if (intent.hasExtra("mode") && intent.getStringExtra("mode").equals(EDIT_MODE)) {
+            editMode = true;
+            Long id = intent.getLongExtra("id", -1);
+            minSpend = dbHelper.getMinSpend(id);
+            setupEditView();
+        }
     }
 
     @Override
@@ -72,7 +83,6 @@ public class NewMinSpendActivity extends Activity implements DatePickerFragment.
         FragmentManager fragMgr = getFragmentManager();
         Calendar calendar = null;
         if (v.getId() == R.id.endDateButton ) {
-            DateFormat format = new SimpleDateFormat("MM-dd-yy", Locale.ENGLISH);
 
             try {
                 calendar = Calendar.getInstance();
@@ -104,8 +114,18 @@ public class NewMinSpendActivity extends Activity implements DatePickerFragment.
             start = format.parse(startDate.getText().toString());
         } catch (Exception e) {}
 
-        MinSpend minSpend = new MinSpend(curr, end, initial, start, MinSpendStatus.OPEN, title.getText().toString(), notes.getText().toString());
-        dbHelper.insertMinSpend(minSpend);
+        if (editMode) {
+            minSpend.setCurrentAmount(curr);
+            minSpend.setInitialAmount(initial);
+            minSpend.setTitle(title.getText().toString());
+            minSpend.setStartDate(start);
+            minSpend.setEndDate(end);
+            minSpend.setNotes(notes.getText().toString());
+            dbHelper.updateMinSpend(minSpend);
+        } else {
+            minSpend = new MinSpend(curr, end, initial, start, MinSpendStatus.OPEN, title.getText().toString(), notes.getText().toString());
+            dbHelper.insertMinSpend(minSpend);
+        }
 
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("updated", GoalType.MIN_SPEND);
@@ -128,6 +148,15 @@ public class NewMinSpendActivity extends Activity implements DatePickerFragment.
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yy");
         dateFormat.setTimeZone(calendar.getTimeZone());
         date.setText(dateFormat.format(calendar.getTime()));
+    }
+
+    private void setupEditView() {
+        title.setText(minSpend.getTitle());
+        startDate.setText(format.format(minSpend.getStartDate()));
+        endDate.setText(format.format(minSpend.getEndDate()));
+        initialAmount.setText(minSpend.getInitialAmount().toString());
+        currentAmount.setText(minSpend.getCurrentAmount().toString());
+        notes.setText(minSpend.getNotes());
     }
 
 

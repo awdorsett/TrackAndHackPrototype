@@ -193,6 +193,17 @@ public class DBHelper extends SQLiteOpenHelper {
         return db.update(DBHelperModule.GC_TABLE, contentValues, idString, null) == 1;
     }
 
+    // TODO update min spend table when starting to use bonus and bonus type
+    public boolean updateMinSpend(MinSpend ms) {
+        if (ms.getUid() == null) {
+            return false;
+        }
+        return updateGoal(ms);
+//        ContentValues contentValues = minSpendContentValues(ms);
+//        String idString = "id=" + ms.getUid();
+//        return db.update(DBHelperModule.MIN_TABLE, contentValues, idString, null) == 1;
+    }
+
     public boolean updateGoal(Goal goal) {
         if (goal.getUid() == null) {
             return false;
@@ -234,6 +245,11 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put("digits", gc.getDigits());
         contentValues.put("fee", gc.getFee());
+        return contentValues;
+    }
+
+    private ContentValues minSpendContentValues(MinSpend ms) {
+        ContentValues contentValues = new ContentValues();
         return contentValues;
     }
 

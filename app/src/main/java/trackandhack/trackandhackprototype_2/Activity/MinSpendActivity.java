@@ -22,8 +22,9 @@ import trackandhack.trackandhackprototype_2.R;
 // TODO fix update card values to save to DB
 public class MinSpendActivity extends Activity {
     MinSpend minSpend;
-    Button closeButton;
+    Button closeButton, editButton;
     DBHelper dbHelper = DBHelper.getInstance(null);
+    Long id;
     boolean edited = false;
 
     @Override
@@ -34,10 +35,11 @@ public class MinSpendActivity extends Activity {
 
         getActionBar().setDisplayShowTitleEnabled(false);
 
-        Long id = intent.getLongExtra("id", -1);
+        id = intent.getLongExtra("id", -1);
         minSpend = dbHelper.getMinSpend(id);
 
         setupView();
+        setupButtons();
     }
 
 
@@ -63,6 +65,16 @@ public class MinSpendActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            minSpend = dbHelper.getMinSpend(id);
+            edited = true;
+            setupView();
+        }
+    }
+
     private void setupView() {
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         TextView title = (TextView) findViewById(R.id.titleText);
@@ -77,14 +89,13 @@ public class MinSpendActivity extends Activity {
 
         progressBar.setMax((int) Math.ceil(minSpend.getInitialAmount()));
         progressBar.setProgress((int) Math.ceil(minSpend.getCurrentAmount()));
-
-        setupButtons();
     }
 
     private void setupButtons() {
         Button doneButton = (Button) findViewById(R.id.doneButton);
         final Button adjustmentButton = (Button) findViewById(R.id.adjustmentButton);
         closeButton = (Button) findViewById(R.id.closeButton);
+        editButton = (Button) findViewById(R.id.editButton);
         final Switch adjustmentSwitch = (Switch) findViewById(R.id.adjustmentSwitch);
         final EditText adjustmentInput = (EditText) findViewById(R.id.adjustmentInput);
         final TextView currentAmount = (TextView) findViewById(R.id.currentAmountText);
@@ -133,6 +144,16 @@ public class MinSpendActivity extends Activity {
                 setStatus(MinSpendStatus.CLOSED);
                 edited = true;
                 returnActivity();
+            }
+        });
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MinSpendActivity.this, NewMinSpendActivity.class);
+                intent.putExtra("mode", NewMinSpendActivity.EDIT_MODE);
+                intent.putExtra("id", minSpend.getUid());
+                startActivityForResult(intent, 1);
             }
         });
 
