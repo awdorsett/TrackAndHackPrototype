@@ -67,10 +67,19 @@ public class NewMinSpendActivity extends Activity implements DatePickerFragment.
 
         return super.onOptionsItemSelected(item);
     }
-
+    // TODO handle date errors
     public void showDatePicker(View v) {
         FragmentManager fragMgr = getFragmentManager();
-        DatePickerFragment datePickerFragment = DatePickerFragment.newInstance(v.getId(), null);
+        Calendar calendar = null;
+        if (v.getId() != R.id.startDateButton && startDate != null) {
+            DateFormat format = new SimpleDateFormat("MM-dd-yy", Locale.ENGLISH);
+            try {
+                calendar = Calendar.getInstance();
+                calendar.setTime(format.parse(startDate.getText().toString()));
+                calendar.add(Calendar.MONTH, 3);
+            } catch (Exception e) {}
+        }
+        DatePickerFragment datePickerFragment = DatePickerFragment.newInstance(v.getId(), calendar);
         datePickerFragment.show(fragMgr, "datePicker");
     }
 

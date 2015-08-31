@@ -12,6 +12,9 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.DatePicker;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import trackandhack.trackandhackprototype_2.R;
 
 /**
@@ -19,7 +22,7 @@ import trackandhack.trackandhackprototype_2.R;
  */
 public class DatePickerFragment extends DialogFragment {
     Integer day, month, year, id;
-    String existingDate;
+    Calendar existingDate;
     Button cancelButton, okayButton;
     DatePicker datePicker;
     Communicator communicator;
@@ -28,13 +31,13 @@ public class DatePickerFragment extends DialogFragment {
      * Create a new instance of MyDialogFragment, providing "num"
      * as an argument.
      */
-    public static DatePickerFragment newInstance(int id, String date) {
+    public static DatePickerFragment newInstance(int id, Calendar calendar) {
         DatePickerFragment f = new DatePickerFragment();
 
         // Supply num input as an argument.
         Bundle args = new Bundle();
         args.putInt("id", id);
-        args.putString("date", date);
+        args.putSerializable("date", calendar);
         f.setArguments(args);
 
         return f;
@@ -52,7 +55,7 @@ public class DatePickerFragment extends DialogFragment {
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
         View view = inflater.inflate(R.layout.fragment_show_date_picker, null);
-        existingDate = getArguments().getString("date");
+        existingDate = (Calendar) getArguments().getSerializable("date");
         id = getArguments().getInt("id");
 
         cancelButton = (Button) view.findViewById(R.id.cancelButton);
@@ -74,6 +77,9 @@ public class DatePickerFragment extends DialogFragment {
             }
         });
         datePicker = (DatePicker) view.findViewById(R.id.datePicker);
+        if (existingDate != null) {
+            datePicker.updateDate(existingDate.get(Calendar.YEAR), existingDate.get(Calendar.MONTH), existingDate.get(Calendar.DAY_OF_MONTH));
+        }
 
         return view;
     }
