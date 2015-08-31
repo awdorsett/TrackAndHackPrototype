@@ -28,7 +28,7 @@ public class NewMinSpendActivity extends Activity implements DatePickerFragment.
     final static String EDIT_MODE = "edit";
     EditText title, startDate, endDate, initialAmount, currentAmount, notes;
     DateFormat format = new SimpleDateFormat("MM-dd-yy", Locale.ENGLISH);
-    Button doneButton;
+    Button cancelButton, doneButton;
     DBHelper dbHelper;
     Boolean editMode = false;
     MinSpend minSpend;
@@ -47,6 +47,7 @@ public class NewMinSpendActivity extends Activity implements DatePickerFragment.
         currentAmount = (EditText) findViewById(R.id.currentInput);
         notes = (EditText) findViewById(R.id.notesInput);
         doneButton = (Button) findViewById(R.id.doneButton);
+        cancelButton = (Button) findViewById(R.id.cancelButton);
 
         Intent intent = getIntent();
         if (intent.hasExtra("mode") && intent.getStringExtra("mode").equals(EDIT_MODE)) {
@@ -55,6 +56,13 @@ public class NewMinSpendActivity extends Activity implements DatePickerFragment.
             minSpend = dbHelper.getMinSpend(id);
             setupEditView();
         }
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
@@ -158,6 +166,4 @@ public class NewMinSpendActivity extends Activity implements DatePickerFragment.
         currentAmount.setText(minSpend.getCurrentAmount().toString());
         notes.setText(minSpend.getNotes());
     }
-
-
 }
