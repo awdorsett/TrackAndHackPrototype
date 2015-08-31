@@ -12,6 +12,10 @@ import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 import trackandhack.trackandhackprototype_2.DBHelper;
 import trackandhack.trackandhackprototype_2.Classes.GoalType;
 import trackandhack.trackandhackprototype_2.Classes.MinSpend;
@@ -21,8 +25,10 @@ import trackandhack.trackandhackprototype_2.R;
 
 // TODO fix update card values to save to DB
 public class MinSpendActivity extends Activity {
+    DateFormat format = new SimpleDateFormat("MM-dd-yy", Locale.ENGLISH);
     MinSpend minSpend;
     Button closeButton, editButton;
+    TextView startDate, endDate;
     DBHelper dbHelper = DBHelper.getInstance(null);
     Long id;
     boolean edited = false;
@@ -81,7 +87,11 @@ public class MinSpendActivity extends Activity {
         TextView currentAmount = (TextView) findViewById(R.id.currentAmountText);
         TextView initialAmount = (TextView) findViewById(R.id.initialAmountText);
         TextView notes = (TextView) findViewById(R.id.notesText);
+        startDate = (TextView) findViewById(R.id.startDateText);
+        endDate = (TextView) findViewById(R.id.endDateText);
 
+        startDate.setText(format.format(minSpend.getStartDate()));
+        endDate.setText(format.format(minSpend.getEndDate()));
         title.setText(minSpend.getTitle());
         currentAmount.setText(Double.toString(minSpend.getCurrentAmount()));
         initialAmount.setText(Double.toString(minSpend.getInitialAmount()));

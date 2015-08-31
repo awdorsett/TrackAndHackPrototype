@@ -37,6 +37,65 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="10dp" />
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/goal_start"
+                    android:id="@+id/startDateLabel"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text=":"
+                    android:id="@+id/startDivider"
+                    android:layout_toRightOf="@+id/startDateLabel" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Small Text"
+                    android:id="@+id/startDateText"
+                    android:layout_toRightOf="@+id/startDivider"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="2dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/goal_end"
+                    android:id="@+id/endDateLabel"
+                    android:layout_toRightOf="@+id/startDateText"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text=":"
+                    android:id="@+id/endDateDivider"
+                    android:layout_toRightOf="@+id/endDateLabel"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Small Text"
+                    android:id="@+id/endDateText"
+                    android:layout_toRightOf="@+id/endDateDivider"
+                    android:layout_marginLeft="2dp" />
+
+            </RelativeLayout>
+
             <ProgressBar
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"

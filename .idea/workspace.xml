@@ -19,11 +19,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8a2f730-0d7e-4aa1-bbf9-a1fbe5f24d5b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/GiftCardActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/GiftCardActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/MinSpendActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/MinSpendActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/NewGiftCardActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/NewGiftCardActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/NewMinSpendActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/NewMinSpendActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_new_gift_card.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_new_gift_card.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_min_spend.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_min_spend.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -85,57 +82,54 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="MinSpendActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/MinSpendActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="91" column="0" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1418#1451#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="NewMinSpendActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/NewMinSpendActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="53" column="77" selection-start-line="53" selection-start-column="77" selection-end-line="53" selection-end-column="77" />
+              <caret line="29" column="36" selection-start-line="29" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1496#1534#0" expanded="true" />
                 <element signature="e#2254#2293#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NewGiftCardActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/NewGiftCardActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.55873924">
-              <caret line="50" column="78" selection-start-line="50" selection-start-column="78" selection-end-line="50" selection-end-column="78" />
+      <file leaf-file-name="activity_min_spend.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_min_spend.xml">
+          <provider editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-13.481482">
+              <caret line="93" column="0" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1452#1489#0" expanded="true" />
-                <element signature="e#1853#1891#0" expanded="true" />
-                <element signature="method#setupButtons#0;class#NewGiftCardActivity#0" expanded="false" />
+                <element signature="e#1937#1957#0" expanded="true" />
+                <element signature="e#3179#3197#0" expanded="true" />
               </folding>
             </state>
+          </provider>
+          <provider selected="true" editor-type-id="android-designer">
+            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.0">
-              <caret line="9" column="48" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="48" />
+            <state vertical-scroll-proportion="-7.5185184">
+              <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DBHelper.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/DBHelper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.7777777">
-              <caret line="200" column="30" selection-start-line="200" selection-start-column="30" selection-end-line="200" selection-end-column="30" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1092#1093#0" expanded="true" />
-                <element signature="e#1142#1143#0" expanded="true" />
-                <element signature="e#2899#2900#0" expanded="true" />
-                <element signature="e#2945#2946#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -1608,7 +1602,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Classes/Group.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Classes/MinSpend.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Classes/DBHelper.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_min_spend.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Module/DBHelperModule.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Classes/Goal.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Classes/GiftCard.java" />
@@ -1624,10 +1617,11 @@
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_gift_card.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_new_gift_card.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/GiftCardActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/MinSpendActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/NewMinSpendActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/NewGiftCardActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/MinSpendActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_min_spend.xml" />
       </list>
     </option>
   </component>
@@ -2080,7 +2074,7 @@
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1542811" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3642496" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.77740306" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2163,8 +2157,14 @@
           <properties />
           <option name="timeStamp" value="30" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/MinSpendActivity.java</url>
+          <line>92</line>
+          <properties />
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="33" />
+      <option name="time" value="34" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2335,16 +2335,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_min_spend.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.037037">
-          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-21/android/database/sqlite/SQLiteDatabase.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2459,20 +2449,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/DBHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.7777777">
-          <caret line="200" column="30" selection-start-line="200" selection-start-column="30" selection-end-line="200" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1092#1093#0" expanded="true" />
-            <element signature="e#1142#1143#0" expanded="true" />
-            <element signature="e#2899#2900#0" expanded="true" />
-            <element signature="e#2945#2946#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_new_gift_card.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.026548672">
@@ -2566,40 +2542,9 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.0">
-          <caret line="9" column="48" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/MinSpendActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33229813">
-          <caret line="72" column="16" selection-start-line="72" selection-start-column="12" selection-end-line="72" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1221#1254#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/NewMinSpendActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="53" column="77" selection-start-line="53" selection-start-column="77" selection-end-line="53" selection-end-column="77" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1496#1534#0" expanded="true" />
-            <element signature="e#2254#2293#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/NewGiftCardActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.55873924">
+        <state vertical-scroll-proportion="0.34513274">
           <caret line="50" column="78" selection-start-line="50" selection-start-column="78" selection-end-line="50" selection-end-column="78" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -2608,6 +2553,64 @@
             <element signature="method#setupButtons#0;class#NewGiftCardActivity#0" expanded="false" />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/DBHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39033458">
+          <caret line="200" column="30" selection-start-line="200" selection-start-column="30" selection-end-line="200" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1092#1093#0" expanded="true" />
+            <element signature="e#1142#1143#0" expanded="true" />
+            <element signature="e#2899#2900#0" expanded="true" />
+            <element signature="e#2945#2946#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.5185184">
+          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/NewMinSpendActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="29" column="36" selection-start-line="29" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2254#2293#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/MinSpendActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="91" column="0" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1418#1451#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_min_spend.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.481482">
+          <caret line="93" column="0" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
+          <folding>
+            <element signature="e#1937#1957#0" expanded="true" />
+            <element signature="e#3179#3197#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
   </component>
