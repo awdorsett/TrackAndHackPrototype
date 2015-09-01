@@ -1,11 +1,7 @@
 package trackandhack.trackandhackprototype_2.Classes;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +12,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import org.w3c.dom.Text;
-
 import java.util.HashMap;
 import java.util.List;
 
-import trackandhack.trackandhackprototype_2.Activity.NewGiftCardActivity;
-import trackandhack.trackandhackprototype_2.MainActivity;
 import trackandhack.trackandhackprototype_2.R;
 
 /**
@@ -32,6 +24,7 @@ public class GroupListAdapter extends BaseExpandableListAdapter {
     private Context ctx;
     private List<Group> groupList;
     private HashMap<Group, Boolean> bulkDelete = new HashMap<>();
+    private boolean showClosed = false;
 
     public GroupListAdapter(Context ctx, List<Group> groupList) {
         this.ctx = ctx;
@@ -127,5 +120,9 @@ public class GroupListAdapter extends BaseExpandableListAdapter {
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
+    }
+
+    public void showClosed(boolean showClosed) {
+        this.showClosed = showClosed;
     }
 }

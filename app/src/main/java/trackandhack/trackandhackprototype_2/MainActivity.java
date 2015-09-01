@@ -3,14 +3,16 @@ package trackandhack.trackandhackprototype_2;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
+import android.widget.Switch;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import trackandhack.trackandhackprototype_2.Activity.GiftCardActivity;
@@ -18,7 +20,7 @@ import trackandhack.trackandhackprototype_2.Activity.MinSpendActivity;
 import trackandhack.trackandhackprototype_2.Activity.NewGiftCardActivity;
 import trackandhack.trackandhackprototype_2.Activity.NewMinSpendActivity;
 import trackandhack.trackandhackprototype_2.Classes.GiftCard;
-import trackandhack.trackandhackprototype_2.Classes.GiftCardStatus;
+import trackandhack.trackandhackprototype_2.Classes.Goal;
 import trackandhack.trackandhackprototype_2.Classes.GoalType;
 import trackandhack.trackandhackprototype_2.Classes.Group;
 import trackandhack.trackandhackprototype_2.Classes.GroupListAdapter;
@@ -30,48 +32,21 @@ public class MainActivity extends Activity {
     List<Group> groupList;
     ExpandableListView groupExpandableListView;
     GroupListAdapter groupListAdapter;
+    HashMap<Group, List<Goal>> goalLists = new HashMap<>();
     DBHelper dbHelper =  DBHelper.getInstance(this);
+    Switch showClosed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getActionBar().setDisplayShowTitleEnabled(false);
         SQLiteDatabase db = openOrCreateDatabase("card_db", MODE_PRIVATE, null);
-        Intent intent = getIntent();
-//        db.execSQL("DROP TABLE Goals");
-//        db.execSQL("DROP TABLE GiftCards");
-//        db.execSQL("DROP TABLE MinSpends");
-
         dbHelper.setDb(db);
 
-        getActionBar().setDisplayShowTitleEnabled(false);
-
-        groupExpandableListView = (ExpandableListView) findViewById(R.id.groupList);
-
-        groupList = GroupModule.groups;
-        getEntriesForGroups();
-        groupListAdapter = new GroupListAdapter(this, groupList);
-        groupExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                Group group = (Group) groupListAdapter.getGroup(groupPosition);
-                Intent intent = null;
-                // TODO throw error when neither GoalType is found
-                if (group.getGoalType().equals(GoalType.GIFT_CARD)) {
-                    intent = new Intent(MainActivity.this, GiftCardActivity.class);
-                    GiftCard gc = (GiftCard) groupListAdapter.getChild(groupPosition, childPosition);
-                    intent.putExtra("id", gc.getUid());
-                } else if (group.getGoalType().equals(GoalType.MIN_SPEND)) {
-                    intent = new Intent(MainActivity.this, MinSpendActivity.class);
-                    MinSpend minSpend = (MinSpend) groupListAdapter.getChild(groupPosition, childPosition);
-                    intent.putExtra("id", minSpend.getUid());
-                }
-
-                startActivityForResult(intent, 1);
-                return false;
-            }
-        });
-        groupExpandableListView.setAdapter(groupListAdapter);
+        showClosed = (Switch) findViewById(R.id.closedSwitch);
+        Intent intent = getIntent();
+        setupGroupList();
 
         if (intent.hasExtra("expand")) {
             GoalType goalType = (GoalType) intent.getSerializableExtra("expand");
@@ -83,6 +58,14 @@ public class MainActivity extends Activity {
                 }
             }
         }
+
+        showClosed.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                putGoalsInList();
+                groupListAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
 
@@ -116,28 +99,6 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    private List<GiftCard> getDemoGiftCardList() {
-        List<GiftCard> gcList = (List<GiftCard>) dbHelper.getEntries(GoalType.GIFT_CARD);
-
-        if (gcList.size() == 0) {
-            Log.d("DATABASE", "list was empty");
-            GiftCard gc = new GiftCard(500.0, "1234", null, 3.95, 500.0, null, GiftCardStatus.OPEN, "GiftCard - x1234", "Here are some notes");
-            GiftCard gc2 = new GiftCard(500.0, "9999", null, 3.95, 500.0, null, GiftCardStatus.OPEN, "GiftCard - x9999", null);
-            GiftCard gc3 = new GiftCard(500.0, "5550", null, 3.95, 500.0, null, GiftCardStatus.OPEN, "GiftCard - x5550", "Something something something");
-            dbHelper.insertGiftCard(gc);
-            dbHelper.insertGiftCard(gc2);
-            dbHelper.insertGiftCard(gc3);
-
-            gcList.add(gc);
-            gcList.add(gc2);
-            gcList.add(gc3);
-        } else {
-            Log.d("DATABASE", "list was NOT empty");
-        }
-
-        return gcList;
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -154,7 +115,54 @@ public class MainActivity extends Activity {
 
     private void getEntriesForGroups() {
         for(Group group : groupList) {
-            group.setGoalList(dbHelper.getEntries(group.getGoalType()));
+            goalLists.put(group, (List<Goal>) dbHelper.getEntries(group.getGoalType(), true));
+        }
+    }
+
+    private void setupGroupList() {
+        groupExpandableListView = (ExpandableListView) findViewById(R.id.groupList);
+
+        groupList = GroupModule.groups;
+        getEntriesForGroups();
+        putGoalsInList();
+        groupListAdapter = new GroupListAdapter(this, groupList);
+        groupListAdapter.showClosed(showClosed.isChecked());
+        groupExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                Group group = (Group) groupListAdapter.getGroup(groupPosition);
+                Intent intent = null;
+                // TODO throw error when neither GoalType is found
+                if (group.getGoalType().equals(GoalType.GIFT_CARD)) {
+                    intent = new Intent(MainActivity.this, GiftCardActivity.class);
+                    GiftCard gc = (GiftCard) groupListAdapter.getChild(groupPosition, childPosition);
+                    intent.putExtra("id", gc.getUid());
+                } else if (group.getGoalType().equals(GoalType.MIN_SPEND)) {
+                    intent = new Intent(MainActivity.this, MinSpendActivity.class);
+                    MinSpend minSpend = (MinSpend) groupListAdapter.getChild(groupPosition, childPosition);
+                    intent.putExtra("id", minSpend.getUid());
+                }
+
+                startActivityForResult(intent, 1);
+                return false;
+            }
+        });
+        groupExpandableListView.setAdapter(groupListAdapter);
+    }
+
+    private void putGoalsInList() {
+        for(Group group : groupList) {
+            List<Goal> openGoalList = new ArrayList<>();
+            List<Goal> closedGoalList = new ArrayList<>();
+            for (Goal goal : goalLists.get(group)) {
+                if (goal.isClosed() && showClosed.isChecked()) {
+                    closedGoalList.add(goal);
+                } else if (!goal.isClosed()) {
+                    openGoalList.add(goal);
+                }
+            }
+            openGoalList.addAll(closedGoalList);
+            group.setGoalList(openGoalList);
         }
     }
 }

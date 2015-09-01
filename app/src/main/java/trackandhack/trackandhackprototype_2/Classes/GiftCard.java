@@ -60,4 +60,9 @@ public class GiftCard extends Goal {
     public void setDigits(String digits) {
         this.digits = digits;
     }
+
+    @Override
+    public boolean isClosed() {
+        return getStatus().equals(GiftCardStatus.CLOSED);
+    }
 }

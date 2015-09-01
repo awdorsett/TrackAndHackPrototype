@@ -149,7 +149,7 @@ public class MinSpendActivity extends Activity {
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int adjustmentDirection = -1;
+                int adjustmentDirection = 1;
                 minSpend.adjustCurrentAmount(adjustmentDirection * minSpend.getInitialAmount());
                 setStatus(MinSpendStatus.CLOSED);
                 edited = true;

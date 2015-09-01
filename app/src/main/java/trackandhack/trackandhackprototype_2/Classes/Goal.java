@@ -130,4 +130,6 @@ public abstract class Goal implements Serializable {
 
         return currentAmount;
     }
+
+    abstract public boolean isClosed();
 }

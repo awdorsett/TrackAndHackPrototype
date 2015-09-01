@@ -30,4 +30,9 @@ public class MinSpend extends Goal {
     public void setBonus(Double bonus) {
         this.bonus = bonus;
     }
+
+    @Override
+    public boolean isClosed() {
+        return getStatus().equals(MinSpendStatus.CLOSED);
+    }
 }
