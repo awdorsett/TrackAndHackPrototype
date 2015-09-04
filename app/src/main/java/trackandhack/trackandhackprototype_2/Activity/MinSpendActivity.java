@@ -163,6 +163,7 @@ public class MinSpendActivity extends Activity {
                 Intent intent = new Intent(MinSpendActivity.this, NewMinSpendActivity.class);
                 intent.putExtra("mode", NewMinSpendActivity.EDIT_MODE);
                 intent.putExtra("id", minSpend.getUid());
+                dbHelper.updateGoal(minSpend);
                 startActivityForResult(intent, 1);
             }
         });

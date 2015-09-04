@@ -36,4 +36,11 @@
     <string name="goal_type">Type</string>
     <string name="goal_notes">Notes</string>
 
+    <!-- Gift Card -->
+    <string name="gc_close">Zero Out and Close</string>
+    <string name="gc_adj">Adjust</string>
+    <!-- Min Spend -->
+    <string name="min_close">Max Out and Close</string>
+    <string name="min_adj">Adjust</string>
+
 </resources>

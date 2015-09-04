@@ -124,7 +124,7 @@ public class NewMinSpendActivity extends Activity implements DatePickerFragment.
         } catch (Exception e) {}
 
         if (editMode) {
-            minSpend.setCurrentAmount(curr);
+            minSpend.setCurrentAmount(Math.min(curr, initial));
             minSpend.setInitialAmount(initial);
             minSpend.setTitle(title.getText().toString());
             minSpend.setStartDate(start);
