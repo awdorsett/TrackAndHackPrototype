@@ -151,6 +151,7 @@ public class NewGiftCardActivity extends Activity {
         giftCard.setNotes(notes.getText().toString());
 
         if (editMode) {
+            giftCard.setCurrentAmount(Math.min(giftCard.getCurrentAmount(), giftCard.getInitialAmount()));
             dbHelper.updateGiftCard(giftCard);
         } else {
             giftCard.setCurrentAmount(Double.parseDouble(amount.getText().toString()));

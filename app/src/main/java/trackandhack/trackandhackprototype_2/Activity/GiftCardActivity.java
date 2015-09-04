@@ -165,6 +165,7 @@ public class GiftCardActivity extends Activity {
                 Intent intent = new Intent(GiftCardActivity.this, NewGiftCardActivity.class);
                 intent.putExtra("mode", NewGiftCardActivity.EDIT_MODE);
                 intent.putExtra("id", giftCard.getUid());
+                dbHelper.updateGiftCard(giftCard);
                 startActivityForResult(intent, 1);
             }
         });
