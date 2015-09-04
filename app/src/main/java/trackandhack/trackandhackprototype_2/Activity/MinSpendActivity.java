@@ -76,6 +76,11 @@ public class MinSpendActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             minSpend = dbHelper.getMinSpend(id);
+            if (minSpend.getStatus().equals(MinSpendStatus.CLOSED)) {
+                closeButton.setEnabled(false);
+            } else {
+                closeButton.setEnabled(true);
+            }
             edited = true;
             setupView();
         }
