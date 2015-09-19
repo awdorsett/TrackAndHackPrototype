@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,7 +13,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Switch;
+import android.widget.TabHost;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import trackandhack.trackandhackprototype_2.DBHelper;
 import trackandhack.trackandhackprototype_2.Classes.GiftCard;
@@ -23,6 +28,7 @@ import trackandhack.trackandhackprototype_2.R;
 
 // TODO fix update card values to save to DB
 public class GiftCardActivity extends Activity {
+    List<String> tabList = new ArrayList<>();
     GiftCard giftCard;
     Button closeButton, editButton;
     DBHelper dbHelper = DBHelper.getInstance(null);
@@ -96,6 +102,7 @@ public class GiftCardActivity extends Activity {
         progressBar.setProgress((int) Math.ceil(giftCard.getCurrentAmount()));
 
         setupButtons();
+        setupTabs();
     }
 
     private void setupButtons() {
@@ -191,5 +198,30 @@ public class GiftCardActivity extends Activity {
             closeButton.setEnabled(false);
             giftCard.setStatus(status);
         }
+    }
+
+    private void setupTabs() {
+        TabHost tabs = (TabHost)findViewById(R.id.tabHost);
+        tabs.setup();
+
+        // Notes
+        if (!tabList.contains("Notes")) {
+            TabHost.TabSpec notesTab = tabs.newTabSpec("Notes");
+            notesTab.setContent(R.id.notesText);
+            notesTab.setIndicator("Notes");
+            tabs.addTab(notesTab);
+            tabList.add("Notes");
+        }
+
+        if (!tabList.contains("History")) {
+            TabHost.TabSpec historyTab = tabs.newTabSpec("History");
+            historyTab.setIndicator("History");
+            historyTab.setContent(R.id.historyList);
+            tabs.addTab(historyTab);
+            tabList.add("History");
+            tabs.setCurrentTab(1);
+        }
+
+        tabs.setCurrentTab(0);
     }
 }
