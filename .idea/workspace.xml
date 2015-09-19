@@ -19,7 +19,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8a2f730-0d7e-4aa1-bbf9-a1fbe5f24d5b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/GiftCardActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/GiftCardActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Classes/Goal.java" afterPath="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Classes/Goal.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -84,8 +83,8 @@
       <file leaf-file-name="GiftCardActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/GiftCardActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.0">
-              <caret line="129" column="72" selection-start-line="129" selection-start-column="72" selection-end-line="129" selection-end-column="72" />
+            <state vertical-scroll-proportion="-16.777779">
+              <caret line="143" column="17" selection-start-line="143" selection-start-column="17" selection-end-line="143" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -95,17 +94,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Classes/Goal.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.57522124">
-              <caret line="132" column="34" selection-start-line="132" selection-start-column="34" selection-end-line="132" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MathContext.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-21/java/math/MathContext.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="117" column="11" selection-start-line="117" selection-start-column="11" selection-end-line="117" selection-end-column="11" />
+              <caret line="131" column="66" selection-start-line="131" selection-start-column="66" selection-end-line="131" selection-end-column="66" />
               <folding />
             </state>
           </provider>
@@ -2613,15 +2602,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/GiftCardActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.0">
-          <caret line="129" column="72" selection-start-line="129" selection-start-column="72" selection-end-line="129" selection-end-column="72" />
+        <state vertical-scroll-proportion="-16.777779">
+          <caret line="143" column="17" selection-start-line="143" selection-start-column="17" selection-end-line="143" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-21/java/math/MathContext.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.14513275">
           <caret line="117" column="11" selection-start-line="117" selection-start-column="11" selection-end-line="117" selection-end-column="11" />
           <folding />
         </state>
@@ -2630,7 +2619,7 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Classes/Goal.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.57522124">
-          <caret line="132" column="34" selection-start-line="132" selection-start-column="34" selection-end-line="132" selection-end-column="34" />
+          <caret line="131" column="66" selection-start-line="131" selection-start-column="66" selection-end-line="131" selection-end-column="66" />
           <folding />
         </state>
       </provider>

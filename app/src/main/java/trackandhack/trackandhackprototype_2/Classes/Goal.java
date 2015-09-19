@@ -128,9 +128,8 @@ public abstract class Goal implements Serializable {
     }
 
     public Double adjustCurrentAmount(Double adjustment) {
-        Double adjustedAmount = currentAmount + adjustment;
-        BigDecimal bigDecimal = new BigDecimal(adjustedAmount);
-        bigDecimal = bigDecimal.setScale(2, RoundingMode.HALF_UP);
+        BigDecimal bigDecimal = new BigDecimal(currentAmount + adjustment);
+        bigDecimal = bigDecimal.setScale(2, RoundingMode.HALF_DOWN);
 
         currentAmount = Math.max(0.00, bigDecimal.doubleValue());
         currentAmount = Math.min(initialAmount, currentAmount);
