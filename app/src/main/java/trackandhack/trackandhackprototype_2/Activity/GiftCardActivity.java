@@ -126,6 +126,7 @@ public class GiftCardActivity extends Activity {
                     if (adjustmentSwitch.isChecked()) {
                         adjustmentDirection = -1;
                     }
+
                     Double amountAfterAdjustment = giftCard.adjustCurrentAmount(adjustmentDirection * adjustment);
                     if (amountAfterAdjustment == 0) {
                         setGiftCardStatus(GiftCardStatus.CLOSED);

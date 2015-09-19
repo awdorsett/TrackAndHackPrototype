@@ -1,6 +1,9 @@
 package trackandhack.trackandhackprototype_2.Classes;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.Date;
 import java.util.UUID;
 
@@ -125,7 +128,11 @@ public abstract class Goal implements Serializable {
     }
 
     public Double adjustCurrentAmount(Double adjustment) {
-        currentAmount = Math.max(0.0, currentAmount + adjustment);
+        Double adjustedAmount = currentAmount + adjustment;
+        BigDecimal bigDecimal = new BigDecimal(adjustedAmount);
+        bigDecimal = bigDecimal.setScale(2, RoundingMode.HALF_UP);
+
+        currentAmount = Math.max(0.00, bigDecimal.doubleValue());
         currentAmount = Math.min(initialAmount, currentAmount);
 
         return currentAmount;
