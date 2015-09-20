@@ -1,9 +1,11 @@
 package trackandhack.trackandhackprototype_2.Classes;
 
+import java.io.Serializable;
+
 /**
  * Created by andrewdorsett on 9/19/15.
  */
-public class HistoryItem {
+public class HistoryItem implements Serializable {
     Long id;
     String date = "";
     Double amount = 0.00;

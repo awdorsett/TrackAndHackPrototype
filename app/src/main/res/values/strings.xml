@@ -40,12 +40,21 @@
     <!-- Activity -->
     <string name="history">History</string>
     <string name="notes">Notes</string>
+    <string name="close">Close</string>
+    <string name="edit">Edit</string>
 
     <!-- Gift Card -->
     <string name="gc_close">Zero Out and Close</string>
     <string name="gc_adj">Adjust</string>
+
     <!-- Min Spend -->
     <string name="min_close">Max Out and Close</string>
     <string name="min_adj">Adjust</string>
+
+    <!-- History -->
+    <string name="history_date_label">Date</string>
+    <string name="history_amount_label">Amount</string>
+    <string name="history_notes_label">Notes</string>
+
 
 </resources>

@@ -1,14 +1,17 @@
 package trackandhack.trackandhackprototype_2.Activity;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,11 +32,12 @@ import trackandhack.trackandhackprototype_2.DBHelper;
 import trackandhack.trackandhackprototype_2.Classes.GiftCard;
 import trackandhack.trackandhackprototype_2.Classes.GiftCardStatus;
 import trackandhack.trackandhackprototype_2.Classes.GoalType;
+import trackandhack.trackandhackprototype_2.Fragments.HistoryFragment;
 import trackandhack.trackandhackprototype_2.MainActivity;
 import trackandhack.trackandhackprototype_2.R;
 
 // TODO fix update card values to save to DB
-public class GiftCardActivity extends Activity {
+public class GiftCardActivity extends Activity implements HistoryFragment.Communicator {
     List<String> tabList = new ArrayList<>();
     LinearLayout actionTab;
     GiftCard giftCard;
@@ -121,10 +125,17 @@ public class GiftCardActivity extends Activity {
         historyItems.add(new HistoryItem(new Random().nextLong(), "01/04/1900", 0.00, null));
 
         // Create an array adapter
-        HistoryListAdapter adapter = new HistoryListAdapter(this, R.layout.history_list_item, historyItems);
-
+        final HistoryListAdapter adapter = new HistoryListAdapter(this, R.layout.history_list_item, historyItems);
         // Create a ListView object
         ListView listView = (ListView) findViewById(R.id.historyList);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                FragmentManager fragMgr = getFragmentManager();
+                HistoryFragment historyFragment = HistoryFragment.newInstance(parent.getId(), (HistoryItem) adapter.getItem(position));
+                historyFragment.show(fragMgr, "historyDetails");
+            }
+        });
         // set the adapter to the view
         listView.setAdapter(adapter);
 
@@ -249,5 +260,10 @@ public class GiftCardActivity extends Activity {
         }
 
         tabs.setCurrentTab(0);
+    }
+
+    @Override
+    public void onDialogMessage(HistoryItem historyItem) {
+
     }
 }
