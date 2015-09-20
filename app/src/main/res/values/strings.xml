@@ -48,6 +48,7 @@
     <!-- Gift Card -->
     <string name="gc_close">Zero Out and Close</string>
     <string name="gc_adj">Adjust</string>
+    <string name="gc_edit_card">Edit Card</string>
 
     <!-- Min Spend -->
     <string name="min_close">Max Out and Close</string>

@@ -7,14 +7,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -27,7 +24,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Random;
 
 import trackandhack.trackandhackprototype_2.Classes.HistoryItem;
 import trackandhack.trackandhackprototype_2.Classes.HistoryListAdapter;
@@ -41,6 +37,7 @@ import trackandhack.trackandhackprototype_2.R;
 
 // TODO fix update card values to save to DB
 public class GiftCardActivity extends Activity implements HistoryFragment.Communicator {
+    int HISTORY_TAB_ID = 1;
     List<String> tabList = new ArrayList<>();
     List<HistoryItem> historyItems, pendingHistoryItems, updatedHistoryItems;
     LinearLayout actionTab;
@@ -144,8 +141,10 @@ public class GiftCardActivity extends Activity implements HistoryFragment.Commun
     }
 
     private void setupButtons() {
-        editButton = (Button) actionTab.findViewById(R.id.editButton);
-        Button doneButton = (Button) actionTab.findViewById(R.id.doneButton);
+        editButton = (Button) findViewById(R.id.editButton);
+        Button saveButton = (Button) findViewById(R.id.saveButton);
+        Button cancelButton = (Button) findViewById(R.id.cancelButton);
+
         final Button adjustmentButton = (Button) actionTab.findViewById(R.id.adjustmentButton);
         closeButton = (Button) actionTab.findViewById(R.id.closeButton);
         final Switch adjustmentSwitch = (Switch) actionTab.findViewById(R.id.adjustmentSwitch);
@@ -153,7 +152,7 @@ public class GiftCardActivity extends Activity implements HistoryFragment.Commun
         final TextView currentAmount = (TextView) actionTab.findViewById(R.id.currentAmountText);
         final ProgressBar progressBar = (ProgressBar) actionTab.findViewById(R.id.progressBar);
 
-        doneButton.setOnClickListener(new View.OnClickListener() {
+        saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -219,12 +218,18 @@ public class GiftCardActivity extends Activity implements HistoryFragment.Commun
             }
         });
 
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 
     private void returnActivity() {
         Intent intent = new Intent(GiftCardActivity.this, MainActivity.class);
         if (edited || updated) {
-
             intent.putExtra("updated", GoalType.GIFT_CARD);
             dbHelper.updateGiftCard(giftCard);
             dbHelper.insertHistory(pendingHistoryItems);
@@ -283,7 +288,7 @@ public class GiftCardActivity extends Activity implements HistoryFragment.Commun
             new AlertDialog.Builder(this)
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setTitle("Adjustments not saved")
-                    .setMessage("If you don't hit Done any adjustments will not be saved")
+                    .setMessage("If you don't hit Save any adjustments will not be saved")
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

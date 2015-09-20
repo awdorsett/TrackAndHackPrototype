@@ -9,7 +9,8 @@
     <TabHost
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/tabHost">
+        android:id="@+id/tabHost"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -234,28 +235,6 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:layout_weight="13">
-
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Done"
-                            android:id="@+id/doneButton"
-                            android:layout_weight="1"
-                            android:layout_gravity="bottom" />
-
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Edit"
-                            android:id="@+id/editButton"
-                            android:layout_weight="1"
-                            android:layout_gravity="bottom" />
-                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -273,5 +252,36 @@
             </FrameLayout>
         </LinearLayout>
     </TabHost>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="10">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            android:id="@+id/cancelButton"
+            android:layout_weight="1"
+            android:layout_gravity="bottom" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/save"
+            android:id="@+id/saveButton"
+            android:layout_weight="1"
+            android:layout_gravity="bottom" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editButton"
+            android:layout_weight="1"
+            android:layout_gravity="bottom"
+            android:text="@string/gc_edit_card" />
+    </LinearLayout>
 
 </LinearLayout>
