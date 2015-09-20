@@ -55,7 +55,16 @@ public class HistoryFragment extends DialogFragment {
         amount.setText(historyItem.getAmount().toString());
 
         TextView notes = (TextView) view.findViewById(R.id.historyNotesText);
-        notes.setText(historyItem.getNotes());
+        TextView notesLabel = (TextView) view.findViewById(R.id.historyNotesLabel);
+
+        if (historyItem.getNotes() == null || historyItem.getNotes().isEmpty()) {
+            notes.setVisibility(View.GONE);
+            notesLabel.setVisibility(View.GONE);
+        } else {
+            notes.setText(historyItem.getNotes());
+            notes.setVisibility(View.VISIBLE);
+            notesLabel.setVisibility(View.VISIBLE);
+        }
 
 
         closedButton = (Button) view.findViewById(R.id.closeButton);

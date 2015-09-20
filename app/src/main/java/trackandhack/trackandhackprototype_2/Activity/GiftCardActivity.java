@@ -1,8 +1,10 @@
 package trackandhack.trackandhackprototype_2.Activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -44,7 +46,7 @@ public class GiftCardActivity extends Activity implements HistoryFragment.Commun
     Button closeButton, editButton;
     DBHelper dbHelper = DBHelper.getInstance(null);
     Long giftCardId;
-    boolean edited = false;
+    boolean edited = false, updated = false;
     InputMethodManager inputManager;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +92,7 @@ public class GiftCardActivity extends Activity implements HistoryFragment.Commun
         if (resultCode == RESULT_OK) {
             if (data.hasExtra("updated")) {
                 setupView();
-                edited = true;
+                updated = true;
             }
         }
     }
@@ -218,7 +220,7 @@ public class GiftCardActivity extends Activity implements HistoryFragment.Commun
 
     private void returnActivity() {
         Intent intent = new Intent(GiftCardActivity.this, MainActivity.class);
-        if (edited) {
+        if (edited || updated) {
             intent.putExtra("updated", GoalType.GIFT_CARD);
             dbHelper.updateGiftCard(giftCard);
         }
@@ -265,5 +267,26 @@ public class GiftCardActivity extends Activity implements HistoryFragment.Commun
     @Override
     public void onDialogMessage(HistoryItem historyItem) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (edited) {
+            new AlertDialog.Builder(this)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setTitle("Adjustments not saved")
+                    .setMessage("If you don't hit Done any adjustments will not be saved")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+        } else {
+            finish();
+        }
     }
 }
