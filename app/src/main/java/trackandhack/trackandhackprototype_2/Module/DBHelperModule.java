@@ -7,7 +7,11 @@ public class DBHelperModule {
     public static String GC_TABLE = "GiftCards";
     public static String GOAL_TABLE = "Goals";
     public static String MIN_TABLE = "MinSpends";
+
+    // INSERT GOAL
     public static String INSERT_INT_GOAL = "INSERT OR IGNORE INTO Goals(currentAmount, endDate, initialAmount, startDate status, title) VALUES ( ?, ?, ?, ?, ?, ?);";
+
+    // CREATE TABLES
     public static String CREATE_GOALS_QUERY =  "CREATE TABLE IF NOT EXISTS Goals(" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "currentAmount DOUBLE," +
@@ -21,21 +25,34 @@ public class DBHelperModule {
             "id INTEGER PRIMARY KEY," +
             "digits TEXT," +
             "fee DOUBLE);";
+    public static String CREATE_HISTORY_QUERY = "CREATE TABLE IF NOT EXISTS History(" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "goal_id INTEGER," +
+            "date TEXT," +
+            "amount DOUBLE," +
+            "notes VARCHAR(255));";
+    public static String CREATE_MS_QUERY = "CREATE TABLE IF NOT EXISTS MinSpends(" +
+            "id INTEGER PRIMARY KEY," +
+            "bonus DOUBLE);";
+
+    // GET GIFT CARDS
     public static String GET_GC_QUERY = "SELECT Goals.id AS id, currentAmount, endDate, initialAmount, startDate, status, title, notes, digits, fee  FROM Goals INNER JOIN GiftCards ON Goals.id = GiftCards.id;";
     public static String GET_GC_QUERY_OPEN = "SELECT Goals.id AS id, currentAmount, endDate, initialAmount, startDate, status, title, notes, digits, fee  FROM Goals INNER JOIN GiftCards ON Goals.id = GiftCards.id WHERE status != ?;";
     public static String GET_GC_BY_ID_QUERY = "SELECT Goals.id AS id, currentAmount, endDate, " +
             "initialAmount, startDate, status, title, notes, digits, fee " +
             "FROM Goals INNER JOIN GiftCards ON Goals.id = GiftCards.id WHERE Goals.id = ?;";
+
+    // GET MIN SPEND
     public static String GET_MS_BY_ID_QUERY = "SELECT Goals.id AS id, currentAmount, endDate, " +
             "initialAmount, startDate, status, title, notes, bonus FROM Goals " +
             "INNER JOIN MinSpends ON Goals.id = MinSpends.id WHERE Goals.id = ?;";
     public static String GET_MS_QUERY = "SELECT Goals.id AS id, currentAmount, endDate, initialAmount, startDate, status, title, notes, bonus  FROM Goals INNER JOIN MinSpends ON Goals.id = MinSpends.id;";
     public static String GET_MS_QUERY_OPEN = "SELECT Goals.id AS id, currentAmount, endDate, initialAmount, startDate, status, title, notes, bonus  FROM Goals INNER JOIN MinSpends ON Goals.id = MinSpends.id WHERE status != ?;";
 
-    public static String CREATE_MS_QUERY = "CREATE TABLE IF NOT EXISTS MinSpends(" +
-            "id INTEGER PRIMARY KEY," +
-            "bonus DOUBLE);";
+    // GET HISTORY
+    public static String GET_HS_FOR_ID = "SELECT History.id AS id, Goal.id AS goal_id, History.date AS date, History.amount AS amount, History.notes AS notes FROM History INNER JOIN Goals ON Goals.id = History.id;";
 
-
-
+    // SET HISTORY
+    public static String INSERT_HS = "INSERT INTO 'History' SELECT ? AS 'goal_id', ? AS 'date', ? AS 'amount', ? AS 'notes'";
+    public static String INSERT_HS_ADDITIONAL = " UNION ALL SELECT ?, ?, ?, ?";
 }

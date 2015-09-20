@@ -9,8 +9,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TabHost;
@@ -18,7 +21,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
+import trackandhack.trackandhackprototype_2.Classes.HistoryItem;
+import trackandhack.trackandhackprototype_2.Classes.HistoryListAdapter;
 import trackandhack.trackandhackprototype_2.DBHelper;
 import trackandhack.trackandhackprototype_2.Classes.GiftCard;
 import trackandhack.trackandhackprototype_2.Classes.GiftCardStatus;
@@ -29,6 +35,7 @@ import trackandhack.trackandhackprototype_2.R;
 // TODO fix update card values to save to DB
 public class GiftCardActivity extends Activity {
     List<String> tabList = new ArrayList<>();
+    LinearLayout actionTab;
     GiftCard giftCard;
     Button closeButton, editButton;
     DBHelper dbHelper = DBHelper.getInstance(null);
@@ -39,12 +46,14 @@ public class GiftCardActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gift_card);
+        actionTab = (LinearLayout) findViewById(R.id.action_tab);
         Intent intent = getIntent();
 
         getActionBar().setTitle(R.string.title_activity_gift_card);
 
         giftCardId = intent.getLongExtra("id", -1);
         inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        setupTabs();
         setupView();
     }
 
@@ -103,17 +112,33 @@ public class GiftCardActivity extends Activity {
 
         setupButtons();
         setupTabs();
+
+        // List of items
+        List<HistoryItem> historyItems = new ArrayList<>();
+        historyItems.add(new HistoryItem(new Random().nextLong(), "01/01/1900", -100.00, "Notes!"));
+        historyItems.add(new HistoryItem(new Random().nextLong(), "01/02/1900", 100.00, ""));
+        historyItems.add(new HistoryItem(new Random().nextLong(), "01/03/1900", 50.00, "Notes"));
+        historyItems.add(new HistoryItem(new Random().nextLong(), "01/04/1900", 0.00, null));
+
+        // Create an array adapter
+        HistoryListAdapter adapter = new HistoryListAdapter(this, R.layout.history_list_item, historyItems);
+
+        // Create a ListView object
+        ListView listView = (ListView) findViewById(R.id.historyList);
+        // set the adapter to the view
+        listView.setAdapter(adapter);
+
     }
 
     private void setupButtons() {
-        editButton = (Button) findViewById(R.id.editButton);
-        Button doneButton = (Button) findViewById(R.id.doneButton);
-        final Button adjustmentButton = (Button) findViewById(R.id.adjustmentButton);
-        closeButton = (Button) findViewById(R.id.closeButton);
-        final Switch adjustmentSwitch = (Switch) findViewById(R.id.adjustmentSwitch);
-        final EditText adjustmentInput = (EditText) findViewById(R.id.adjustmentInput);
-        final TextView currentAmount = (TextView) findViewById(R.id.currentAmountText);
-        final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        editButton = (Button) actionTab.findViewById(R.id.editButton);
+        Button doneButton = (Button) actionTab.findViewById(R.id.doneButton);
+        final Button adjustmentButton = (Button) actionTab.findViewById(R.id.adjustmentButton);
+        closeButton = (Button) actionTab.findViewById(R.id.closeButton);
+        final Switch adjustmentSwitch = (Switch) actionTab.findViewById(R.id.adjustmentSwitch);
+        final EditText adjustmentInput = (EditText) actionTab.findViewById(R.id.adjustmentInput);
+        final TextView currentAmount = (TextView) actionTab.findViewById(R.id.currentAmountText);
+        final ProgressBar progressBar = (ProgressBar) actionTab.findViewById(R.id.progressBar);
 
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,14 +230,15 @@ public class GiftCardActivity extends Activity {
         tabs.setup();
 
         // Notes
-        if (!tabList.contains("Notes")) {
-            TabHost.TabSpec notesTab = tabs.newTabSpec("Notes");
-            notesTab.setContent(R.id.notesText);
-            notesTab.setIndicator("Notes");
+        if (!tabList.contains("Action")) {
+            TabHost.TabSpec notesTab = tabs.newTabSpec("Action");
+            notesTab.setContent(R.id.action_tab);
+            notesTab.setIndicator("Action");
             tabs.addTab(notesTab);
-            tabList.add("Notes");
+            tabList.add("Action");
         }
 
+        // History
         if (!tabList.contains("History")) {
             TabHost.TabSpec historyTab = tabs.newTabSpec("History");
             historyTab.setIndicator("History");

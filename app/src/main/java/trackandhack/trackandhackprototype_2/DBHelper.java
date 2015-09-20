@@ -52,6 +52,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(DBHelperModule.CREATE_GOALS_QUERY);
         db.execSQL(DBHelperModule.CREATE_GC_QUERY);
         db.execSQL(DBHelperModule.CREATE_MS_QUERY);
+        db.execSQL(DBHelperModule.CREATE_HISTORY_QUERY);
     }
 
     public List<?> getEntries(GoalType type, Boolean includeClosed) {
