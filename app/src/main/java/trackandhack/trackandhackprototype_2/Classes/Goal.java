@@ -138,4 +138,9 @@ public abstract class Goal implements Serializable {
     }
 
     abstract public boolean isClosed();
+
+    public static Double maxAdjustmentAmount(Double currentAmount, Double adjustment) {
+        double adjustmentDirection = adjustment > 0 ? 1.0 : -1.0;
+        return Math.min(Math.abs(adjustment), Math.abs(currentAmount)) * adjustmentDirection;
+    }
 }

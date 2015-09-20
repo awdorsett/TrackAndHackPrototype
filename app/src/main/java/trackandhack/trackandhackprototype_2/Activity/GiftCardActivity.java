@@ -172,7 +172,9 @@ public class GiftCardActivity extends Activity implements HistoryFragment.Commun
                         adjustmentDirection = -1;
                     }
 
+                    adjustHistory(adjustmentDirection * adjustment);
                     Double amountAfterAdjustment = giftCard.adjustCurrentAmount(adjustmentDirection * adjustment);
+
                     if (amountAfterAdjustment == 0) {
                         setGiftCardStatus(GiftCardStatus.CLOSED);
                     } else if (giftCard.getStatus().equals(GiftCardStatus.CLOSED)) {
@@ -183,7 +185,6 @@ public class GiftCardActivity extends Activity implements HistoryFragment.Commun
                     adjustmentInput.setText(null);
                     v.clearFocus();
 
-                    adjustHistory(adjustmentDirection * adjustment);
 
                     edited = true;
                     inputManager.hideSoftInputFromWindow(v.getWindowToken(),
@@ -200,6 +201,7 @@ public class GiftCardActivity extends Activity implements HistoryFragment.Commun
             @Override
             public void onClick(View v) {
                 int adjustmentDirection = -1;
+                adjustHistory(adjustmentDirection * giftCard.getInitialAmount());
                 giftCard.adjustCurrentAmount(adjustmentDirection * giftCard.getInitialAmount());
                 setGiftCardStatus(GiftCardStatus.CLOSED);
                 edited = true;
@@ -231,6 +233,11 @@ public class GiftCardActivity extends Activity implements HistoryFragment.Commun
         Intent intent = new Intent(GiftCardActivity.this, MainActivity.class);
         if (edited || updated) {
             intent.putExtra("updated", GoalType.GIFT_CARD);
+            if (giftCard.getCurrentAmount() > 0) {
+                giftCard.setStatus(GiftCardStatus.OPEN);
+            } else {
+                giftCard.setStatus(GiftCardStatus.CLOSED);
+            }
             dbHelper.updateGiftCard(giftCard);
             dbHelper.insertHistory(pendingHistoryItems);
             dbHelper.updateHistory(updatedHistoryItems);
@@ -304,11 +311,13 @@ public class GiftCardActivity extends Activity implements HistoryFragment.Commun
     }
 
     private void adjustHistory(Double amount) {
+
         Calendar calendar = Calendar.getInstance();
         HistoryItem historyItem = new HistoryItem();
-        historyItem.setAmount(amount);
+        historyItem.setAmount(GiftCard.maxAdjustmentAmount(giftCard.getCurrentAmount(), amount));
         historyItem.setGoalId(giftCard.getUid());
         historyItem.setDate(calendar.getTime());
+
         pendingHistoryItems.add(historyItem);
         historyItems.add(historyItem);
     }

@@ -15,13 +15,12 @@
   </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_LOG_LEVEL" value="ERROR" />
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8a2f730-0d7e-4aa1-bbf9-a1fbe5f24d5b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/GiftCardActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/GiftCardActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_gift_card.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_gift_card.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Classes/Goal.java" afterPath="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Classes/Goal.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="TrackAndHackProtoType_2.iws" />
@@ -85,8 +84,8 @@
       <file leaf-file-name="GiftCardActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/GiftCardActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.65057915">
-              <caret line="231" column="32" selection-start-line="231" selection-start-column="32" selection-end-line="231" selection-end-column="32" />
+            <state vertical-scroll-proportion="1.1007752">
+              <caret line="234" column="59" selection-start-line="234" selection-start-column="59" selection-end-line="234" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2168#2201#0" expanded="true" />
@@ -94,17 +93,27 @@
                 <element signature="e#5404#5405#0" expanded="true" />
                 <element signature="e#6325#6476#0" expanded="true" />
                 <element signature="e#6475#6476#0" expanded="true" />
-                <element signature="e#8115#8497#0" expanded="true" />
-                <element signature="e#8496#8497#0" expanded="true" />
-                <element signature="e#8539#8981#0" expanded="true" />
-                <element signature="e#8980#8981#0" expanded="true" />
-                <element signature="e#9025#9167#0" expanded="true" />
-                <element signature="e#9166#9167#0" expanded="true" />
-                <element signature="e#10776#11038#0" expanded="true" />
-                <element signature="e#11037#11038#0" expanded="true" />
-                <element signature="e#11448#11689#0" expanded="true" />
-                <element signature="e#11688#11689#0" expanded="true" />
+                <element signature="e#8116#8580#0" expanded="true" />
+                <element signature="e#8579#8580#0" expanded="true" />
+                <element signature="e#8622#9064#0" expanded="true" />
+                <element signature="e#9063#9064#0" expanded="true" />
+                <element signature="e#9108#9250#0" expanded="true" />
+                <element signature="e#9249#9250#0" expanded="true" />
+                <element signature="e#11061#11323#0" expanded="true" />
+                <element signature="e#11322#11323#0" expanded="true" />
+                <element signature="e#11733#11974#0" expanded="true" />
+                <element signature="e#11973#11974#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Goal.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Classes/Goal.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="141" column="44" selection-start-line="141" selection-start-column="25" selection-end-line="141" selection-end-column="44" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -1660,14 +1669,12 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_new_gift_card.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/main_nav_drawer.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Classes/GiftCard.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Classes/MinSpend.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/goal_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Classes/GroupListAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_min_spend.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/MinSpendActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/NewGiftCardActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Classes/Goal.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/history_list.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/history_list_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/border.xml" />
@@ -1683,6 +1690,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/DBHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_gift_card.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Classes/GiftCard.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Classes/Goal.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/GiftCardActivity.java" />
       </list>
     </option>
@@ -2210,7 +2219,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6745362" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1542811" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6559865" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.6559865" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -2452,21 +2461,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Classes/GiftCard.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="66" selection-end-column="5" />
-          <folding>
-            <element signature="e#661#662#0" expanded="false" />
-            <element signature="e#744#745#0" expanded="false" />
-            <element signature="e#1431#1432#0" expanded="false" />
-            <element signature="e#1457#1458#0" expanded="false" />
-            <element signature="e#1813#1814#0" expanded="false" />
-            <element signature="e#1877#1878#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Classes/MinSpend.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.76106197">
@@ -2637,14 +2631,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Classes/Goal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="129" column="18" selection-start-line="129" selection-start-column="18" selection-end-line="129" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2847,10 +2833,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Classes/GiftCard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6605505">
+          <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Classes/Goal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="141" column="44" selection-start-line="141" selection-start-column="25" selection-end-line="141" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/trackandhack/trackandhackprototype_2/Activity/GiftCardActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.65057915">
-          <caret line="231" column="32" selection-start-line="231" selection-start-column="32" selection-end-line="231" selection-end-column="32" />
+        <state vertical-scroll-proportion="1.1007752">
+          <caret line="234" column="59" selection-start-line="234" selection-start-column="59" selection-end-line="234" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2168#2201#0" expanded="true" />
@@ -2858,16 +2860,16 @@
             <element signature="e#5404#5405#0" expanded="true" />
             <element signature="e#6325#6476#0" expanded="true" />
             <element signature="e#6475#6476#0" expanded="true" />
-            <element signature="e#8115#8497#0" expanded="true" />
-            <element signature="e#8496#8497#0" expanded="true" />
-            <element signature="e#8539#8981#0" expanded="true" />
-            <element signature="e#8980#8981#0" expanded="true" />
-            <element signature="e#9025#9167#0" expanded="true" />
-            <element signature="e#9166#9167#0" expanded="true" />
-            <element signature="e#10776#11038#0" expanded="true" />
-            <element signature="e#11037#11038#0" expanded="true" />
-            <element signature="e#11448#11689#0" expanded="true" />
-            <element signature="e#11688#11689#0" expanded="true" />
+            <element signature="e#8116#8580#0" expanded="true" />
+            <element signature="e#8579#8580#0" expanded="true" />
+            <element signature="e#8622#9064#0" expanded="true" />
+            <element signature="e#9063#9064#0" expanded="true" />
+            <element signature="e#9108#9250#0" expanded="true" />
+            <element signature="e#9249#9250#0" expanded="true" />
+            <element signature="e#11061#11323#0" expanded="true" />
+            <element signature="e#11322#11323#0" expanded="true" />
+            <element signature="e#11733#11974#0" expanded="true" />
+            <element signature="e#11973#11974#0" expanded="true" />
           </folding>
         </state>
       </provider>
