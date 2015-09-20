@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.ViewSwitcher;
 
 import trackandhack.trackandhackprototype_2.Classes.HistoryItem;
 import trackandhack.trackandhackprototype_2.R;
@@ -22,6 +23,7 @@ public class HistoryFragment extends DialogFragment {
     HistoryItem historyItem;
     Communicator communicator;
     Button closedButton, editButton;
+    ViewSwitcher viewSwitcher;
 
     public static HistoryFragment newInstance(int id, HistoryItem historyItem) {
         HistoryFragment f = new HistoryFragment();
@@ -47,6 +49,8 @@ public class HistoryFragment extends DialogFragment {
         View view = inflater.inflate(R.layout.fragment_view_history, null);
 
         historyItem = (HistoryItem) getArguments().getSerializable("historyItem");
+
+        viewSwitcher = (ViewSwitcher) view.findViewById(R.id.historySwitcher);
 
         TextView date = (TextView) view.findViewById(R.id.historyDateText);
         date.setText(historyItem.getDate());
@@ -75,6 +79,12 @@ public class HistoryFragment extends DialogFragment {
             }
         });
         editButton = (Button) view.findViewById(R.id.editButton);
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewSwitcher.showNext();
+            }
+        });
 
 
         return view;
