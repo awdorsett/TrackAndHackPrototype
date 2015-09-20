@@ -7,6 +7,7 @@ public class DBHelperModule {
     public static String GC_TABLE = "GiftCards";
     public static String GOAL_TABLE = "Goals";
     public static String MIN_TABLE = "MinSpends";
+    public static String HISTORY_TABLE = "History";
 
     // INSERT GOAL
     public static String INSERT_INT_GOAL = "INSERT OR IGNORE INTO Goals(currentAmount, endDate, initialAmount, startDate status, title) VALUES ( ?, ?, ?, ?, ?, ?);";
@@ -50,9 +51,9 @@ public class DBHelperModule {
     public static String GET_MS_QUERY_OPEN = "SELECT Goals.id AS id, currentAmount, endDate, initialAmount, startDate, status, title, notes, bonus  FROM Goals INNER JOIN MinSpends ON Goals.id = MinSpends.id WHERE status != ?;";
 
     // GET HISTORY
-    public static String GET_HS_FOR_ID = "SELECT History.id AS id, Goal.id AS goal_id, History.date AS date, History.amount AS amount, History.notes AS notes FROM History INNER JOIN Goals ON Goals.id = History.id;";
+    public static String GET_HS_FOR_ID = "SELECT History.id AS id, History.goal_id AS goal_id, History.date AS date, History.amount AS amount, History.notes AS notes FROM History INNER JOIN Goals ON Goals.id = ?;";
 
     // SET HISTORY
-    public static String INSERT_HS = "INSERT INTO 'History' SELECT ? AS 'goal_id', ? AS 'date', ? AS 'amount', ? AS 'notes'";
-    public static String INSERT_HS_ADDITIONAL = " UNION ALL SELECT ?, ?, ?, ?";
+    public static String INSERT_HS = "INSERT INTO History (goal_id, date, amount, notes) VALUES";
+    public static String INSERT_HS_VALUE_SET = " (?, ?, ?, ?)";
 }

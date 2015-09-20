@@ -57,6 +57,8 @@
     <string name="history_date_label">Date</string>
     <string name="history_amount_label">Amount</string>
     <string name="history_notes_label">Notes</string>
+    <string name="pending_adjustment_popup_title">Adjustment Pending</string>
+    <string name="pending_adjustment_popup_body">This adjustment is pending, it can not be edited</string>
 
 
 </resources>

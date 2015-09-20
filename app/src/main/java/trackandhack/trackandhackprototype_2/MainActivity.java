@@ -42,6 +42,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         getActionBar().setDisplayShowTitleEnabled(false);
         SQLiteDatabase db = openOrCreateDatabase("card_db", MODE_PRIVATE, null);
+//        db.execSQL("DROP TABLE History;");
         dbHelper.setDb(db);
 
         showClosed = (Switch) findViewById(R.id.closedSwitch);

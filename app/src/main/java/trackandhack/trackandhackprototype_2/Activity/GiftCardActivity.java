@@ -25,6 +25,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
@@ -41,6 +42,7 @@ import trackandhack.trackandhackprototype_2.R;
 // TODO fix update card values to save to DB
 public class GiftCardActivity extends Activity implements HistoryFragment.Communicator {
     List<String> tabList = new ArrayList<>();
+    List<HistoryItem> historyItems, pendingHistoryItems, updatedHistoryItems;
     LinearLayout actionTab;
     GiftCard giftCard;
     Button closeButton, editButton;
@@ -120,11 +122,9 @@ public class GiftCardActivity extends Activity implements HistoryFragment.Commun
         setupTabs();
 
         // List of items
-        List<HistoryItem> historyItems = new ArrayList<>();
-        historyItems.add(new HistoryItem(new Random().nextLong(), "01/01/1900", -100.00, "Notes!"));
-        historyItems.add(new HistoryItem(new Random().nextLong(), "01/02/1900", 100.00, ""));
-        historyItems.add(new HistoryItem(new Random().nextLong(), "01/03/1900", 50.00, "Notes"));
-        historyItems.add(new HistoryItem(new Random().nextLong(), "01/04/1900", 0.00, null));
+        historyItems = dbHelper.getHistory(giftCard);
+        pendingHistoryItems = new ArrayList<>();
+        updatedHistoryItems = new ArrayList<>();
 
         // Create an array adapter
         final HistoryListAdapter adapter = new HistoryListAdapter(this, R.layout.history_list_item, historyItems);
@@ -156,6 +156,7 @@ public class GiftCardActivity extends Activity implements HistoryFragment.Commun
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 returnActivity();
             }
         });
@@ -182,8 +183,10 @@ public class GiftCardActivity extends Activity implements HistoryFragment.Commun
                     progressBar.setProgress(giftCard.getCurrentAmount().intValue());
                     adjustmentInput.setText(null);
                     v.clearFocus();
-                    edited = true;
 
+                    adjustHistory(adjustmentDirection * adjustment);
+
+                    edited = true;
                     inputManager.hideSoftInputFromWindow(v.getWindowToken(),
                             InputMethodManager.HIDE_NOT_ALWAYS);
                 }
@@ -221,8 +224,11 @@ public class GiftCardActivity extends Activity implements HistoryFragment.Commun
     private void returnActivity() {
         Intent intent = new Intent(GiftCardActivity.this, MainActivity.class);
         if (edited || updated) {
+
             intent.putExtra("updated", GoalType.GIFT_CARD);
             dbHelper.updateGiftCard(giftCard);
+            dbHelper.insertHistory(pendingHistoryItems);
+            dbHelper.updateHistory(updatedHistoryItems);
         }
         setResult(RESULT_OK, intent);
         finish();
@@ -261,12 +267,14 @@ public class GiftCardActivity extends Activity implements HistoryFragment.Commun
             tabs.setCurrentTab(1);
         }
 
+        tabs.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+                ListView listView = (ListView) findViewById(R.id.historyList);
+                listView.refreshDrawableState();
+            }
+        });
         tabs.setCurrentTab(0);
-    }
-
-    @Override
-    public void onDialogMessage(HistoryItem historyItem) {
-
     }
 
     @Override
@@ -288,5 +296,33 @@ public class GiftCardActivity extends Activity implements HistoryFragment.Commun
         } else {
             finish();
         }
+    }
+
+    private void adjustHistory(Double amount) {
+        Calendar calendar = Calendar.getInstance();
+        HistoryItem historyItem = new HistoryItem();
+        historyItem.setAmount(amount);
+        historyItem.setGoalId(giftCard.getUid());
+        historyItem.setDate(calendar.getTime());
+        pendingHistoryItems.add(historyItem);
+        historyItems.add(historyItem);
+    }
+
+
+    @Override
+    public void onDialogMessage(HistoryItem historyItem) {
+        TextView currentAmount = (TextView) actionTab.findViewById(R.id.currentAmountText);
+
+        ListView listView = (ListView) findViewById(R.id.historyList);
+        ((HistoryListAdapter)listView.getAdapter()).notifyDataSetChanged();
+        currentAmount.setText(giftCard.getCurrentAmount().toString());
+
+        updatedHistoryItems.add(historyItem);
+    }
+
+    @Override
+    public void adjustGiftCard(Double adjustment) {
+        giftCard.adjustCurrentAmount(adjustment);
+        edited = true;
     }
 }

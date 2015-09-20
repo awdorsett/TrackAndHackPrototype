@@ -10,11 +10,13 @@ import android.util.Log;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import trackandhack.trackandhackprototype_2.Classes.GiftCard;
 import trackandhack.trackandhackprototype_2.Classes.GiftCardStatus;
 import trackandhack.trackandhackprototype_2.Classes.Goal;
 import trackandhack.trackandhackprototype_2.Classes.GoalType;
+import trackandhack.trackandhackprototype_2.Classes.HistoryItem;
 import trackandhack.trackandhackprototype_2.Classes.MinSpend;
 import trackandhack.trackandhackprototype_2.Classes.MinSpendStatus;
 import trackandhack.trackandhackprototype_2.Module.DBHelperModule;
@@ -26,7 +28,7 @@ import trackandhack.trackandhackprototype_2.Module.DBHelperModule;
 public class DBHelper extends SQLiteOpenHelper {
     private static DBHelper instance = null;
     SQLiteDatabase db;
-    SimpleDateFormat iso8601Format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
 
     private DBHelper(Context context){
         super(context, "card_db", null, 1);
@@ -103,11 +105,11 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put("currentAmount", goal.getCurrentAmount());
         if (goal.getEndDate() != null) {
-            contentValues.put("endDate",  iso8601Format.format(goal.getEndDate()));
+            contentValues.put("endDate", dateFormat.format(goal.getEndDate()));
         }
         contentValues.put("initialAmount", goal.getInitialAmount());
         if (goal.getStartDate() != null) {
-            contentValues.put("startDate", iso8601Format.format(goal.getStartDate()));
+            contentValues.put("startDate", dateFormat.format(goal.getStartDate()));
         }
         contentValues.put("status", goal.getStatus().getName());
         contentValues.put("title", goal.getTitle());
@@ -125,13 +127,13 @@ public class DBHelper extends SQLiteOpenHelper {
             ms.setUid(rs.getLong(0));
             ms.setCurrentAmount(rs.getDouble(1));
             if (rs.getString(2) != null) {
-                ms.setEndDate(iso8601Format.parse(rs.getString(2)));
+                ms.setEndDate(dateFormat.parse(rs.getString(2)));
             } else {
                 ms.setEndDate(null);
             }
             ms.setInitialAmount(rs.getDouble(3));
             if (rs.getString(4) != null) {
-                ms.setStartDate(iso8601Format.parse(rs.getString(4)));
+                ms.setStartDate(dateFormat.parse(rs.getString(4)));
             } else {
                 ms.setStartDate(null);
             }
@@ -152,13 +154,13 @@ public class DBHelper extends SQLiteOpenHelper {
             gc.setUid(rs.getLong(0));
             gc.setCurrentAmount(rs.getDouble(1));
             if (rs.getString(2) != null) {
-                gc.setEndDate(iso8601Format.parse(rs.getString(2)));
+                gc.setEndDate(dateFormat.parse(rs.getString(2)));
             } else {
                 gc.setEndDate(null);
             }
             gc.setInitialAmount(rs.getDouble(3));
             if (rs.getString(4) != null) {
-                gc.setStartDate(iso8601Format.parse(rs.getString(4)));
+                gc.setStartDate(dateFormat.parse(rs.getString(4)));
             } else {
                 gc.setStartDate(null);
             }
@@ -230,11 +232,11 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put("currentAmount", goal.getCurrentAmount());
         if (goal.getEndDate() != null) {
-            contentValues.put("endDate",  iso8601Format.format(goal.getEndDate()));
+            contentValues.put("endDate", dateFormat.format(goal.getEndDate()));
         }
         contentValues.put("initialAmount", goal.getInitialAmount());
         if (goal.getStartDate() != null) {
-            contentValues.put("startDate", iso8601Format.format(goal.getStartDate()));
+            contentValues.put("startDate", dateFormat.format(goal.getStartDate()));
         }
         contentValues.put("status", goal.getStatus().getName());
         contentValues.put("title", goal.getTitle());
@@ -252,6 +254,90 @@ public class DBHelper extends SQLiteOpenHelper {
     private ContentValues minSpendContentValues(MinSpend ms) {
         ContentValues contentValues = new ContentValues();
         return contentValues;
+    }
+
+    public boolean updateHistory(HistoryItem historyItem) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("goal_id", historyItem.getGoalId());
+        contentValues.put("date", dateFormat.format(historyItem.getDate()));
+        contentValues.put("notes", historyItem.getNotes());
+        contentValues.put("amount", historyItem.getAmount());
+        return db.update(DBHelperModule.HISTORY_TABLE, contentValues, "id = ?", new String[]{historyItem.getUid().toString()}) == 1;
+    }
+
+    // TODO optimize updating into 1 query
+    public boolean updateHistory(List<HistoryItem> historyItems) {
+        int count = 0;
+        for (HistoryItem item : historyItems) {
+            updateHistory(item);
+            count++;
+        }
+        return count == historyItems.size();
+    }
+
+    public boolean insertHistory(List<HistoryItem> historyItems) {
+        if (historyItems.size() > 0) {
+            List<String> updateValues = new ArrayList<>();
+            String query = DBHelperModule.INSERT_HS;
+            for (int i = 0; i < historyItems.size(); i++) {
+                HistoryItem hs = historyItems.get(i);
+                updateValues.add(hs.getGoalId().toString());
+                updateValues.add(dateFormat.format(hs.getDate()));
+                updateValues.add(hs.getAmount().toString());
+                updateValues.add(hs.getNotes());
+                query += DBHelperModule.INSERT_HS_VALUE_SET;
+            }
+            query += ";";
+
+            String[] valueArray = updateValues.toArray(new String[updateValues.size()]);
+
+            Cursor rs = db.rawQuery(query, valueArray);
+
+            return rs.getCount() > 0;
+        }
+
+        return false;
+    }
+
+    public void insertHistory(HistoryItem historyItem) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("goal_id", historyItem.getGoalId());
+        contentValues.put("date", dateFormat.format(historyItem.getDate()));
+        contentValues.put("notes", historyItem.getNotes());
+        contentValues.put("amount", historyItem.getAmount());
+
+        Long row = db.insert(DBHelperModule.HISTORY_TABLE, null, contentValues);
+
+        if (row != -1) {
+            historyItem.setUid(row);
+        }
+    }
+
+    public List<HistoryItem> getHistory(Goal goal) {
+        Cursor resultSet = db.rawQuery(DBHelperModule.GET_HS_FOR_ID, new String[]{goal.getUid().toString()});
+        List<HistoryItem> historyItems = new ArrayList<>();
+        while (resultSet.moveToNext()) {
+            historyItems.add(getHistoryItem(resultSet));
+        }
+
+        return historyItems;
+    }
+    private HistoryItem getHistoryItem (Cursor rs) {
+        HistoryItem hs = new HistoryItem();
+        try {
+            hs.setUid(rs.getLong(0));
+            hs.setGoalId(rs.getLong(1));
+            hs.setDate(dateFormat.parse(rs.getString(2)));
+            hs.setAmount(rs.getDouble(3));
+            if (rs.getString(4) != null && !rs.getString(4).isEmpty()) {
+                hs.setNotes(rs.getString(4));
+            }
+
+            return hs;
+        } catch (Exception e) {
+            Log.d("DATABASE", "EXCEPTION! " + e);
+            return null;
+        }
     }
 
 
