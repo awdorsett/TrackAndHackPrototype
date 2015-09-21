@@ -4,14 +4,21 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
+import android.widget.ListAdapter;
+import android.widget.SimpleAdapter;
 import android.widget.Switch;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -36,13 +43,16 @@ public class MainActivity extends Activity {
     DBHelper dbHelper =  DBHelper.getInstance(this);
     Switch showClosed;
 
+    private static final List<String> adjectives = new ArrayList<>(Arrays.asList(new String[]{
+            "Awesome", "Peculiar", "Green", "Sad", "Gross", "Lovely", "Insane",
+            "Compostable", "Blue", "Wooden", "Grotesque", "Beautiful"}));
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getActionBar().setDisplayShowTitleEnabled(false);
         SQLiteDatabase db = openOrCreateDatabase("card_db", MODE_PRIVATE, null);
-//        db.execSQL("DROP TABLE History;");
         dbHelper.setDb(db);
 
         showClosed = (Switch) findViewById(R.id.closedSwitch);
@@ -59,14 +69,6 @@ public class MainActivity extends Activity {
                 }
             }
         }
-
-        showClosed.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                putGoalsInList();
-                groupListAdapter.notifyDataSetChanged();
-            }
-        });
     }
 
 

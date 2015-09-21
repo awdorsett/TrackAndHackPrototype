@@ -15,7 +15,7 @@
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="@drawable/rectangle"
+            android:background="@drawable/payment_icon"
             android:layout_weight="2"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"

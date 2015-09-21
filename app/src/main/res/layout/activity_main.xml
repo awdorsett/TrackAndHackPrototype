@@ -26,5 +26,7 @@
         android:id="@+id/groupList"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:drawSelectorOnTop="true" />
+        android:drawSelectorOnTop="true"
+        android:layout_weight="1" />
+
 </LinearLayout>

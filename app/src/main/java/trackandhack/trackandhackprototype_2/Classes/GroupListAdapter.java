@@ -79,11 +79,9 @@ public class GroupListAdapter extends BaseExpandableListAdapter {
             LayoutInflater inflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.group_layout, parentView, false);
         }
-        Button toggleBulkDelete = (Button) convertView.findViewById(R.id.bulkCloseButton);
         TextView groupView = (TextView) convertView.findViewById(R.id.groupListTitle);
         groupView.setText(group.getTitle());
         groupView.setTextColor(Color.WHITE);
-        toggleBulkDelete.setEnabled(false);
 
         return convertView;
     }

@@ -20,14 +20,5 @@
         android:layout_weight="1"
         android:gravity="center" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Bulk Close"
-        android:id="@+id/bulkCloseButton"
-        android:layout_weight="3"
-        android:focusable="false"/>
-
 
 </LinearLayout>
